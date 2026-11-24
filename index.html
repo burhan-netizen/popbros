@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Popbros Industries | Elastic Tapes, Cords &amp; Trims Manufacturer Since 1963</title>
+<meta name="description" content="Popbros Industries, Surat: ISO 9001:2015 certified manufacturer of braided, knitted, woven and jacquard elastics, cords and trims since 1963." />
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#0e2236;
+    --navy-2:#16304a;
+    --teal:#2aa5b6;
+    --teal-dark:#1c8392;
+    --teal-tint:#e8f6f8;
+    --text:#1d2a36;
+    --body:#55636f;
+    --line:#e3e8ed;
+    --bg-soft:#f5f7f9;
+    --white:#fff;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(14,34,54,.04),0 8px 24px rgba(14,34,54,.06);
+    --shadow-lg:0 2px 4px rgba(14,34,54,.04),0 24px 48px rgba(14,34,54,.10);
+    --head:"Plus Jakarta Sans",system-ui,sans-serif;
+    --sans:"Inter",system-ui,sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --ease-out:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  html,body{overflow-x:clip}
+  body{font-family:var(--sans);color:var(--body);background:var(--white);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  h1,h2,h3,h4{font-family:var(--head);color:var(--text);line-height:1.15;letter-spacing:-.02em}
+  .container{width:min(1200px,calc(100% - 48px));margin:0 auto}
+  .section{padding:104px 0}
+  .soft{background:var(--bg-soft)}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark)}
+  .kicker::before{content:"";width:18px;height:2px;background:var(--teal);border-radius:2px}
+  .h2{font-size:clamp(30px,3.4vw,44px);font-weight:700;margin:14px 0 16px}
+  .lead{font-size:17px;max-width:620px}
+  .center{text-align:center}.center .lead{margin:0 auto}
+  .sec-head{margin-bottom:56px}
+
+  /* scroll progress */
+  .progress{position:fixed;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--teal),#5fd0de);transform-origin:left;transform:scaleX(0);z-index:60;pointer-events:none}
+
+  /* elastic thread */
+  #thread{position:absolute;left:0;top:0;pointer-events:none;z-index:45;overflow:visible;display:none}
+  #thread .track{fill:none;stroke:#d6e2ea;stroke-width:1.5}
+  #thread .draw{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round}
+  #thread .knot{fill:#fff;stroke:#c8d6e0;stroke-width:2;transition:fill .4s,stroke .4s}
+  #thread .knot.on{fill:var(--teal);stroke:var(--teal)}
+  #thread .tip{fill:var(--teal)}
+  #thread .tip-glow{fill:var(--teal);opacity:.18}
+
+  /* buttons: left-to-right fill */
+  .btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 24px;border-radius:10px;font-family:var(--head);font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:color .35s var(--ease),border-color .35s,transform .25s var(--ease),box-shadow .25s}
+  .btn::before{content:"";position:absolute;inset:-1px;z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-out)}
+  .btn:hover::before{transform:scaleX(1)}
+  .btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn-primary{background:var(--teal);color:#fff;box-shadow:0 6px 16px -6px rgba(42,165,182,.6)}
+  .btn-primary::before{background:var(--navy)}
+  .btn-primary:hover{transform:translateY(-1px)}
+  .btn-outline{border-color:var(--line);color:var(--text);background:#fff}
+  .btn-outline::before{background:var(--navy)}
+  .btn-outline:hover{color:#fff;border-color:var(--navy)}
+  .btn-white{background:#fff;color:var(--navy)}
+  .btn-white::before{background:var(--teal)}
+  .btn-white:hover{color:#fff}
+  .btn-ghost{border-color:rgba(255,255,255,.3);color:#fff}
+  .btn-ghost::before{background:#fff}
+  .btn-ghost:hover{color:var(--navy);border-color:#fff}
+
+  /* topbar */
+  .topbar{background:var(--navy);color:#b9c6d2;font-size:13px}
+  .topbar .container{display:flex;justify-content:space-between;align-items:center;height:42px;gap:20px}
+  .topbar .group{display:flex;gap:24px;align-items:center}
+  .topbar a{display:inline-flex;align-items:center;gap:7px;transition:color .2s}
+  .topbar a:hover{color:#fff}
+  .topbar svg{width:14px;height:14px;color:var(--teal)}
+
+  /* header (shrinks on scroll) */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+  header.scrolled{border-color:var(--line);box-shadow:0 4px 20px rgba(14,34,54,.06)}
+  header .container{position:relative;display:flex;align-items:center;justify-content:space-between;height:80px;gap:24px;transition:height .4s var(--ease)}
+  header.scrolled .container{height:64px}
+  .logo img{height:48px;width:auto;transition:height .4s var(--ease)}
+  header.scrolled .logo img{height:38px}
+  header .btn{transition:height .4s var(--ease),color .35s var(--ease),transform .25s var(--ease)}
+  header.scrolled .btn{height:44px}
+  .menu{position:relative;display:flex;gap:4px;list-style:none}
+  .menu a{position:relative;display:block;padding:10px 16px;font-family:var(--head);font-weight:600;font-size:15px;color:var(--text);transition:color .25s}
+  .menu a:hover,.menu a.active{color:var(--teal-dark)}
+  .nav-ind{position:absolute;bottom:3px;left:0;width:0;height:2px;border-radius:2px;background:var(--teal);transition:left .45s var(--ease-out),width .45s var(--ease-out),opacity .3s;pointer-events:none}
+  .toggle{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:46px;height:46px;cursor:pointer}
+  .toggle span{display:block;width:20px;height:2px;background:var(--text);margin:4px auto}
+
+  /* hero */
+  .hero{position:relative;padding:72px 0 96px;background:linear-gradient(180deg,#fff 0%,var(--bg-soft) 100%);overflow:hidden}
+  .hero::before{content:"";position:absolute;right:-180px;top:-180px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(42,165,182,.12),transparent 70%)}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.02fr 1fr;gap:64px;align-items:center}
+  .hero h1{font-size:clamp(38px,4.6vw,60px);font-weight:800;margin:18px 0 20px}
+  .hero h1 .hl{color:var(--teal-dark)}
+  .split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+  .split .w > span{display:inline-block;will-change:transform}
+  .js .split{visibility:hidden}
+  .hero p.lead{font-size:18px;margin-bottom:34px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .hero-trust{display:flex;gap:28px;margin-top:44px;padding-top:28px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .hero-trust div{display:flex;align-items:center;gap:12px}
+  .hero-trust .ic{width:42px;height:42px;border-radius:10px;background:var(--teal-tint);display:grid;place-items:center;color:var(--teal-dark);flex:none}
+  .hero-trust .ic svg{width:20px;height:20px}
+  .hero-trust b{display:block;font-family:var(--head);color:var(--text);font-size:15px;line-height:1.2}
+  .hero-trust small{font-size:13px}
+  .hero-visual{position:relative}
+  .hero-frame{position:relative;aspect-ratio:5/4.4;border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg);background:#dfe6ec}
+  .hero-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+  .hero-frame img.first{opacity:1}
+  .hero-caption{position:absolute;left:18px;bottom:18px;z-index:3;background:rgba(255,255,255,.95);border-radius:10px;padding:10px 14px;font-family:var(--head);font-weight:700;font-size:14px;color:var(--text);display:flex;gap:10px;align-items:center}
+  .hero-caption i{width:8px;height:8px;border-radius:50%;background:var(--teal)}
+  .hero-caption span{display:inline-block}
+  .hero-dots{position:absolute;right:18px;bottom:24px;z-index:3;display:flex;gap:6px}
+  .hero-dots button{width:8px;height:8px;border-radius:8px;border:0;background:rgba(255,255,255,.55);cursor:pointer;transition:width .45s var(--ease-out),background .3s}
+  .hero-dots button.on{width:26px;background:#fff}
+  .float-card{position:absolute;z-index:4;background:#fff;border-radius:14px;box-shadow:var(--shadow-lg);padding:18px 20px;display:flex;gap:14px;align-items:center;animation:float 6s ease-in-out infinite}
+  .float-card.a{left:-34px;top:38px}
+  .float-card.b{right:-24px;bottom:84px;animation-delay:-3s}
+  .float-card .num{font-family:var(--head);font-weight:800;font-size:30px;color:var(--navy);line-height:1}
+  .float-card small{font-size:13px;line-height:1.35;display:block;max-width:110px}
+  .float-card img{width:46px;height:46px;object-fit:contain}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* hero entrance (pure CSS so it never depends on scripts) */
+  .hero .rv{opacity:1;transform:none;animation:heroIn 1s var(--ease-out) both}
+  .hero .kicker.rv{animation-delay:.05s}
+  .hero .lead.rv{animation-delay:.55s}
+  .hero .hero-ctas.rv{animation-delay:.68s}
+  .hero .hero-trust.rv{animation-delay:.8s}
+  .hero .hero-visual.rv{animation:heroVisual 1.3s var(--ease-out) .2s both}
+  @keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  @keyframes heroVisual{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:none}}
+
+  /* certifications */
+  .certstrip{background:#fff;border-top:1px solid var(--line);padding:72px 0 80px}
+  .cert-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:36px}
+  .cert-head h2{font-size:clamp(24px,2.4vw,32px);font-weight:700;margin-top:10px}
+  .cert-head p{max-width:420px;font-size:15px}
+  .cert-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+  .cert-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 16px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;cursor:default;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
+  .cert-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:transparent;z-index:6}
+  .cert-logo{height:120px;width:100%;display:grid;place-items:center;margin-bottom:16px;border-radius:10px}
+  .cert-logo img{max-height:120px;max-width:100%;width:auto;object-fit:contain;border-radius:6px}
+  .cert-card b{font-family:var(--head);font-weight:700;color:var(--text);font-size:15px;line-height:1.3}
+  .cert-card small{font-size:13px;margin-top:4px;line-height:1.4}
+  .cert-card::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 12px);width:min(230px,70vw);transform:translate(-50%,8px);background:var(--navy);color:#e6eef4;font-size:13px;line-height:1.5;text-align:left;padding:12px 14px;border-radius:10px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .25s,transform .35s var(--ease-out)}
+  .cert-card::before{content:"";position:absolute;left:50%;bottom:calc(100% + 6px);width:12px;height:12px;background:var(--navy);transform:translate(-50%,8px) rotate(45deg);opacity:0;transition:opacity .25s,transform .35s var(--ease-out);pointer-events:none}
+  .cert-card:hover::after{opacity:1;transform:translate(-50%,0)}
+  .cert-card:hover::before{opacity:1;transform:translate(-50%,0) rotate(45deg)}
+
+  /* products */
+  .filters{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:4px;width:fit-content;max-width:100%;margin:-20px auto 44px;padding:6px;background:var(--bg-soft);border:1px solid var(--line);border-radius:999px}
+  .filters button{position:relative;z-index:1;border:0;background:none;padding:10px 18px;border-radius:999px;font-family:var(--head);font-weight:600;font-size:14px;color:var(--body);cursor:pointer;transition:color .35s}
+  .filters button:hover{color:var(--text)}
+  .filters button.on{color:#fff}
+  .filters button sup{font-size:11px;margin-left:4px;opacity:.7}
+  .filter-pill{position:absolute;z-index:0;left:0;top:6px;height:38px;width:0;background:var(--navy);border-radius:999px;transition:left .5s var(--ease-out),top .5s var(--ease-out),width .5s var(--ease-out)}
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .prod{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .45s var(--ease),border-color .45s;will-change:transform}
+  .prod.is-hidden{display:none}
+  .prod-grid.flipping .prod{transition:none}
+  .prod:hover{box-shadow:0 2px 4px rgba(14,34,54,.04),0 30px 60px -12px rgba(14,34,54,.22);border-color:transparent}
+  .prod-img{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--bg-soft)}
+  .prod-img img{width:100%;height:100%;object-fit:cover;will-change:transform}
+  .prod-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,34,54,0) 25%,rgba(28,131,146,.62));opacity:0;transition:opacity .45s var(--ease)}
+  .prod:hover .prod-img::after{opacity:1}
+  /* light sheen that follows the cursor across the photo */
+  .prod-sheen{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(380px circle at var(--sx,50%) var(--sy,0%),rgba(255,255,255,.32),rgba(255,255,255,0) 50%);opacity:0;transition:opacity .45s}
+  .prod:hover .prod-sheen{opacity:1}
+  /* teal border glow that follows the cursor across the whole grid */
+  .prod-glow{position:absolute;inset:0;z-index:4;border-radius:inherit;padding:1.5px;pointer-events:none;background:radial-gradient(260px circle at var(--mx,-999px) var(--my,-999px),rgba(42,165,182,1),rgba(42,165,182,.3) 45%,rgba(42,165,182,0) 72%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .45s}
+  .prod-grid.glow .prod-glow{opacity:1}
+  @keyframes arrowLoop{0%{transform:translateX(0);opacity:1}40%{transform:translateX(12px);opacity:0}41%{transform:translateX(-12px);opacity:0}100%{transform:translateX(0);opacity:1}}
+  .prod:hover .prod-cta svg{animation:arrowLoop .7s var(--ease-out) .25s}
+  @media (hover:none){.prod{transition:transform .2s var(--ease),box-shadow .35s}.prod:active{transform:scale(.985)}}
+  .prod-cta{position:absolute;z-index:2;left:50%;bottom:18px;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:#fff;color:var(--navy);font-family:var(--head);font-weight:700;font-size:14px;white-space:nowrap;box-shadow:0 10px 24px -8px rgba(14,34,54,.4);opacity:0;transform:translate(-50%,24px);transition:opacity .35s var(--ease),transform .5s var(--ease-out)}
+  .prod-cta{--tx:0px;--ty:0px;translate:var(--tx) var(--ty)}
+  .prod-cta svg{width:14px;height:14px}
+  .prod:hover .prod-cta{opacity:1;transform:translate(-50%,0)}
+  .prod-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+  .prod h3{font-size:19px;font-weight:700;margin-bottom:8px}
+  .prod p{font-size:15px;flex:1;margin-bottom:18px}
+  .prod .link{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:600;font-size:14px;color:var(--teal-dark)}
+  .prod .link svg{width:15px;height:15px;transition:transform .25s var(--ease)}
+  .prod:hover .link svg{transform:translateX(4px)}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:72px;align-items:center}
+  .about-media{position:relative}
+  .about-media .main{border-radius:20px;overflow:hidden;aspect-ratio:478/500;box-shadow:var(--shadow-lg)}
+  .about-media .main img{width:100%;height:118%;object-fit:cover;margin-top:-9%}
+  .since{position:absolute;right:-28px;bottom:-28px;background:var(--navy);color:#fff;border-radius:16px;padding:24px 28px;box-shadow:var(--shadow-lg)}
+  .since small{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9fb2c3;font-weight:600}
+  .since b{display:block;font-family:var(--head);font-size:44px;font-weight:800;line-height:1.05}
+  .checks{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin:28px 0 34px}
+  .checks li{display:flex;gap:10px;align-items:flex-start;font-weight:500;color:var(--text);font-size:15px}
+  .checks svg{width:20px;height:20px;flex:none;color:var(--teal);margin-top:2px}
+
+  /* stats */
+  .stats{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .stats-bg{position:absolute;left:0;right:0;top:-30%;bottom:-30%;background:url(assets/slider-1.jpg) center/cover;opacity:.08}
+  .stats .container{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);padding:64px 0}
+  .stat{text-align:center;padding:0 16px;border-right:1px solid rgba(255,255,255,.12)}
+  .stat:last-child{border-right:0}
+  .stat .n{font-family:var(--head);font-weight:800;font-size:clamp(40px,4.4vw,56px);line-height:1;color:#fff}
+  .stat .n span:last-child{color:var(--teal)}
+  .stat .u{display:block;width:44px;height:3px;border-radius:3px;background:var(--teal);margin:16px auto 0;transform:scaleX(0);transition:transform 1.1s var(--ease-out) .25s}
+  .stat.counted .u{transform:scaleX(1)}
+  .stat p{color:#a9bccc;margin-top:12px;font-size:15px}
+
+  /* why */
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .feat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
+  .feat:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#cfe9ed}
+  .feat .ic{width:52px;height:52px;border-radius:12px;background:var(--teal-tint);color:var(--teal-dark);display:grid;place-items:center;margin-bottom:22px;transition:background .3s,color .3s}
+  .feat:hover .ic{background:var(--teal);color:#fff}
+  .feat .ic svg{width:24px;height:24px}
+  .feat h3{font-size:18px;font-weight:700;margin-bottom:8px}
+  .feat p{font-size:15px}
+
+  /* industries */
+  .ind-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .ind{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 16px;text-align:center;transition:border-color .3s,transform .3s var(--ease)}
+  .ind:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .ind svg{width:34px;height:34px;color:var(--teal-dark);margin:0 auto 14px}
+  .ind b{font-family:var(--head);font-weight:600;color:var(--text);font-size:15px;line-height:1.3;display:block}
+
+  /* cta band */
+  .cta{position:relative;border-radius:22px;overflow:hidden;background:var(--navy);padding:64px;display:grid;grid-template-columns:1.4fr auto;gap:40px;align-items:center}
+  .cta-bg{position:absolute;left:0;right:0;top:-25%;bottom:-25%;background:url(assets/slider-2.jpg) center/cover;opacity:.2}
+  .cta::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy) 35%,rgba(14,34,54,.55))}
+  .cta > :not(.cta-bg){position:relative;z-index:1}
+  .cta h2{color:#fff;font-size:clamp(28px,3vw,40px);font-weight:700;margin-bottom:12px}
+  .cta p{color:#b9c6d2;max-width:560px}
+  .cta .btns{display:flex;gap:12px;flex-wrap:wrap}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:40px}
+  .info-card{background:var(--navy);color:#c8d4de;border-radius:18px;padding:40px 36px;display:flex;flex-direction:column;gap:28px}
+  .info-card h3{color:#fff;font-size:24px}
+  .info-row{display:flex;gap:16px}
+  .info-row .ic{width:44px;height:44px;border-radius:10px;background:rgba(42,165,182,.16);color:var(--teal);display:grid;place-items:center;flex:none}
+  .info-row .ic svg{width:20px;height:20px}
+  .info-row small{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#8ea3b6;font-weight:600;margin-bottom:2px}
+  .info-row a,.info-row span{color:#fff;font-weight:500}
+  .info-row a:hover{color:var(--teal)}
+  .map{position:relative;border-radius:12px;overflow:hidden;height:190px;margin-top:auto}
+  .map iframe{width:100%;height:100%;border:0;filter:grayscale(.3)}
+  .pin{position:absolute;left:50%;top:50%;z-index:2;width:34px;height:44px;margin:-44px 0 0 -17px;pointer-events:none;opacity:0}
+  .pin svg{width:100%;height:100%;filter:drop-shadow(0 6px 6px rgba(14,34,54,.35))}
+  .pin-ring{position:absolute;left:50%;top:50%;z-index:1;width:40px;height:16px;margin:-8px 0 0 -20px;border-radius:50%;border:2px solid var(--teal);opacity:0;pointer-events:none}
+  .map.drop .pin{animation:pinDrop .9s var(--ease-out) both}
+  .map.drop .pin-ring{animation:ring 2s ease-out .8s infinite}
+  @keyframes pinDrop{0%{opacity:0;transform:translateY(-140px)}55%{opacity:1;transform:translateY(0)}72%{transform:translateY(-14px)}86%{transform:translateY(0)}93%{transform:translateY(-4px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes ring{0%{opacity:.9;transform:scale(.4)}100%{opacity:0;transform:scale(2.2)}}
+
+  form{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:18px;padding:40px;box-shadow:var(--shadow)}
+  form h3{font-size:24px;margin-bottom:6px}
+  form > p{margin-bottom:28px;font-size:15px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{position:relative;margin-bottom:18px}
+  .field input,.field select,.field textarea{width:100%;font:inherit;font-size:15px;color:var(--text);padding:17px 14px 9px;border:1px solid var(--line);border-radius:10px;background:#fbfcfd;outline:none;transition:border-color .25s,box-shadow .25s,background .25s}
+  .field textarea{min-height:120px;resize:vertical;padding-top:22px}
+  .field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%2355636f' stroke-width='2'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+  .field label{position:absolute;left:15px;top:14px;font-size:15px;color:#8592a0;pointer-events:none;transform-origin:left top;transition:transform .3s var(--ease-out),color .25s}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(42,165,182,.12);background:#fff}
+  .field input:focus + label,.field input:not(:placeholder-shown) + label,
+  .field textarea:focus + label,.field textarea:not(:placeholder-shown) + label,
+  .field select + label{transform:translateY(-9px) scale(.76);color:var(--teal-dark);font-weight:600}
+  .field input::placeholder,.field textarea::placeholder{color:transparent}
+  .form-note{font-size:13px;margin-top:14px}
+  .form-done{position:absolute;inset:0;z-index:5;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+  .form-done.show{opacity:1;visibility:visible}
+  .form-done svg{width:84px;height:84px;margin-bottom:22px}
+  .form-done circle{fill:none;stroke:var(--teal);stroke-width:3;stroke-dasharray:240;stroke-dashoffset:240}
+  .form-done path{fill:none;stroke:var(--teal);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60}
+  .form-done.show circle{animation:dash .8s var(--ease-out) .15s forwards}
+  .form-done.show path{animation:dash .5s var(--ease-out) .75s forwards}
+  @keyframes dash{to{stroke-dashoffset:0}}
+  .form-done h3{margin-bottom:8px}
+  .form-done p{margin-bottom:24px;max-width:340px}
+
+  /* footer */
+  footer{background:#0a1a2a;color:#9fb0bf;padding-top:72px;font-size:15px}
+  .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;padding-bottom:56px}
+  .foot .flogo{display:inline-block;margin-bottom:18px}
+  .foot .flogo img{height:44px}
+  .foot h4{color:#fff;font-size:15px;margin-bottom:18px}
+  .foot ul{list-style:none;display:grid;gap:10px}
+  .foot a{transition:color .2s}
+  .foot a:hover{color:var(--teal)}
+  .foot address{font-style:normal;line-height:1.75}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);padding:22px 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#7a8d9e}
+
+  /* scroll reveal (driven by GSAP; hidden only when scripts run) */
+  .js .rv{opacity:0;transform:translateY(28px)}
+  .js .rv.in{opacity:1;transform:none}
+  .rv:not(.in){transition:none}
+
+  .totop{position:fixed;right:24px;bottom:24px;width:46px;height:46px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;box-shadow:var(--shadow-lg);opacity:0;transform:translateY(12px);transition:opacity .3s,transform .3s,background .2s;z-index:40}
+  .totop.show{opacity:1;transform:none}
+  .totop:hover{background:var(--teal)}
+  .totop svg{width:18px;height:18px}
+
+  @media (max-width:1024px){
+    .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+    .hero-visual{max-width:620px}
+    .float-card.a{left:12px}.float-card.b{right:12px}
+    .prod-grid,.why-grid{grid-template-columns:1fr 1fr}
+    .ind-grid,.cert-grid{grid-template-columns:repeat(3,1fr)}
+    .since{right:16px;bottom:-24px}
+    .cta{grid-template-columns:1fr;padding:44px}
+    .foot{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:860px){
+    .menu,.header-cta{display:none}
+    .toggle{display:block}
+    .menu.open{display:flex;flex-direction:column;position:absolute;top:100%;left:-24px;right:-24px;background:#fff;border-bottom:1px solid var(--line);padding:12px 24px 20px;box-shadow:0 20px 30px rgba(14,34,54,.08)}
+    .menu.open .nav-ind{display:none}
+    .topbar .hide-sm{display:none}
+    .stats .container{grid-template-columns:1fr 1fr;row-gap:36px}
+    .stat:nth-child(2){border-right:0}
+  }
+  @media (max-width:600px){
+    .section{padding:76px 0}
+    .prod-grid,.why-grid,.row,.checks{grid-template-columns:1fr}
+    .ind-grid{grid-template-columns:1fr 1fr}
+    .foot{grid-template-columns:1fr}
+    .float-card{display:none}
+    form,.info-card{padding:28px 22px}
+    .cert-grid{grid-template-columns:1fr 1fr}.cert-logo{height:100px}.cert-logo img{max-height:100px}
+    .filters{flex-wrap:nowrap;justify-content:flex-start;width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .filters::-webkit-scrollbar{display:none}
+    .filters button{white-space:nowrap;flex:none}
+  }
+  @media (hover:none){.prod-cta{opacity:1;transform:translate(-50%,0)}}
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    .js .rv,.js .split{opacity:1;transform:none;visibility:visible}
+    .pin{opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<svg id="thread" aria-hidden="true"></svg>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></g></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/></g></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></g></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></g></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20V8l6 4V8l6 4V4h8v16H2z"/><path d="M17 16h1M12 16h1M7 16h1"/></g></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1"/></g></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></g></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M20.4 6.6 16 4a4 4 0 0 1-8 0L3.6 6.6a1 1 0 0 0-.5 1.2l1.2 3.4a1 1 0 0 0 1.3.6L7 11.3V21a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-9.7l1.4.5a1 1 0 0 0 1.3-.6l1.2-3.4a1 1 0 0 0-.5-1.2z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M9 12h6M12 9v6"/></g></symbol>
+    <symbol id="i-shoe" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2 17V8l5 1 3 3 6 1.5c3 .7 6 2 6 4.5v1H2zM2 21h20M9 11l1.5-1.5M12 12l1.5-1.5"/></symbol>
+    <symbol id="i-sofa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M4 18v2M20 18v2"/></g></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C9 3 11 5 12 8c1-3 3-5 4.5-5a2.5 2.5 0 0 1 0 5"/></g></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m18 15-6-6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<div class="topbar">
+  <div class="container">
+    <div class="group">
+      <a href="tel:+919426601176"><svg><use href="#i-phone"/></svg>+91 94266 01176</a>
+      <a href="mailto:contact@popbros.com"><svg><use href="#i-mail"/></svg>contact@popbros.com</a>
+    </div>
+    <div class="group hide-sm">
+      <span>ISO 9001:2015 Certified · OEKO-TEX® Standard 100</span>
+    </div>
+  </div>
+</div>
+
+<header id="header">
+  <div class="container">
+    <a href="#home" class="logo" aria-label="Popbros Industries"><img src="assets/logo-transparent.png" alt="Popbros Industries" /></a>
+    <ul class="menu" id="menu">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#quality">Quality</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="nav-ind" id="navInd" aria-hidden="true"></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary header-cta">Request a Quote <svg><use href="#i-arrow"/></svg></a>
+    <button class="toggle" id="toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="kicker rv">Elastic manufacturer since 1963</span>
+      <h1 class="split" id="heroTitle">Premium elastic tapes, cords &amp; trims, <span class="hl">made to perform.</span></h1>
+      <p class="lead rv">Popbros Industries manufactures braided, knitted and woven elastics from heat resistant rubber threads, trusted by garment, medical and furnishing manufacturers across India for over 60 years.</p>
+      <div class="hero-ctas rv">
+        <a href="#products" class="btn btn-primary">Explore Products <svg><use href="#i-arrow"/></svg></a>
+        <a href="#contact" class="btn btn-outline">Request a Quote</a>
+      </div>
+      <div class="hero-trust rv">
+        <div><span class="ic"><svg><use href="#i-award"/></svg></span><span><b>ISO 9001:2015</b><small>Certified company</small></span></div>
+        <div><span class="ic"><svg><use href="#i-leaf"/></svg></span><span><b>OEKO-TEX® 100</b><small>Certified products</small></span></div>
+        <div><span class="ic"><svg><use href="#i-shield"/></svg></span><span><b>Latex-free</b><small>Braided elastics</small></span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual rv" id="heroVisual">
+      <div class="hero-frame" id="heroFrame">
+        <img class="first" src="assets/slider-2.jpg" alt="Braided elastic in multiple colours" data-cap="Braided Elastic" />
+        <img src="assets/slider-1.jpg" alt="Knitted elastic" data-cap="Knitted Elastic" />
+        <img src="assets/slider-3.jpg" alt="Woven garment elastic" data-cap="Woven / Garment Elastics" />
+        <img src="assets/slider-4.jpg" alt="Mask elastics" data-cap="Mask Elastics" />
+        <div class="hero-caption"><i></i><span id="heroCap">Braided Elastic</span></div>
+        <div class="hero-dots" id="heroDots"><button class="on" aria-label="Slide 1"></button><button aria-label="Slide 2"></button><button aria-label="Slide 3"></button><button aria-label="Slide 4"></button></div>
+      </div>
+      <div class="float-card a" data-depth="16"><div class="num"><span class="count" data-to="60">60</span>+</div><small>Years of manufacturing expertise</small></div>
+      <div class="float-card b" data-depth="-12"><img src="assets/certs/certificate-2.png" alt="OEKO-TEX" /><small><b style="color:var(--text)">OEKO-TEX®</b><br/>Standard 100</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certstrip" data-knot>
+  <div class="container">
+    <div class="cert-head">
+      <div>
+        <span class="kicker rv">Certifications &amp; Credentials</span>
+        <h2 class="rv">Certified quality you can rely on</h2>
+      </div>
+      <p class="rv">Independently audited standards and trusted business listings that back every order we deliver. Hover a badge to learn more.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card rv" data-tip="An internationally recognised standard for consistent, documented quality management across every stage of production."><div class="cert-logo"><img src="assets/certs/certificate-1.png" alt="ISO 9001:2015 certified company" loading="lazy" /></div><b>ISO 9001:2015</b><small>Quality management</small></div>
+      <div class="cert-card rv" data-tip="Every component is tested for harmful substances, so our elastics are safe for garments worn directly against the skin."><div class="cert-logo"><img src="assets/certs/certificate-2.png" alt="OEKO-TEX Standard 100" loading="lazy" /></div><b>OEKO-TEX® 100</b><small>Tested for harmful substances</small></div>
+      <div class="cert-card rv" data-tip="The global quality management standard required of suppliers to the automotive industry."><div class="cert-logo"><img src="assets/certs/certificate-8.jpg" alt="IATF 16949 certified company" loading="lazy" /></div><b>IATF 16949</b><small>Automotive quality standard</small></div>
+      <div class="cert-card rv" data-tip="Registered with the Ministry of Micro, Small &amp; Medium Enterprises, Government of India."><div class="cert-logo"><img src="assets/certs/certificate-5.png" alt="MSME registered enterprise" loading="lazy" /></div><b>MSME Registered</b><small>Govt. of India</small></div>
+      <div class="cert-card rv" data-tip="A Justdial certified business with 5-star ratings from customers."><div class="cert-logo"><img src="assets/certs/certificate-6.jpg" alt="Justdial certified, 5-star rated" loading="lazy" /></div><b>Justdial Certified</b><small>5-star rated business</small></div>
+      <div class="cert-card rv" data-tip="Listed supplier on IndiaMART, India's largest B2B marketplace."><div class="cert-logo"><img src="assets/certs/indiamart.png" alt="IndiaMART supplier" loading="lazy" /></div><b>IndiaMART</b><small>Verified supplier listing</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products" data-knot>
+  <div class="container">
+    <div class="sec-head center">
+      <span class="kicker rv">Our Product Range</span>
+      <h2 class="h2 rv">Elastics for every application</h2>
+      <p class="lead rv">More than 300 products across nine categories, available in a wide range of widths, colours and stretch profiles.</p>
+    </div>
+    <div class="filters rv" id="filters" role="tablist" aria-label="Filter products">
+      <span class="filter-pill" id="filterPill"></span>
+      <button class="on" data-f="all" role="tab">All<sup>9</sup></button>
+      <button data-f="garment" role="tab">Garment<sup>4</sup></button>
+      <button data-f="medical" role="tab">Medical<sup>1</sup></button>
+      <button data-f="furnish" role="tab">Footwear &amp; Furnishing<sup>2</sup></button>
+      <button data-f="cords" role="tab">Cords &amp; Ribbons<sup>2</sup></button>
+    </div>
+    <div class="prod-grid" id="prodGrid">
+      <a class="prod rv" data-cat="garment" href="https://www.popbros.com/braidedelastics.php"><div class="prod-img"><img src="assets/products/insertion-tapes.jpg" alt="Braided elastic" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Braided Elastic</h3><p>Made from multiple strands of rubber or latex braided together. Lightweight and ideal for sleeves, necklines and casings.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="prod rv" data-cat="garment" href="https://www.popbros.com/knittedelastics.php"><div class="prod-img"><img src="assets/products/knittedelastic.jpg" alt="Knitted elastic" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Knitted Elastic</h3><p>A versatile, soft elastic that retains its width when stretched, suited to a wide variety of garment applications.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="prod rv" data-cat="garment" href="https://www.popbros.com/wovenelastics.php"><div class="prod-img"><img src="assets/products/wovenelastic.jpg" alt="Woven garment elastic" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Woven / Garment Elastics</h3><p>Known for strength and durability, holding their performance even after repeated use and washing.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="prod rv" data-cat="garment" href="https://www.popbros.com/jacquard.php"><div class="prod-img"><img src="assets/products/jacaquardelastic.jpg" alt="Jacquard name tape elastic" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Jacquard Name Tape Elastics</h3><p>A smooth, soft texture with a glossy finish, woven with your brand name or pattern for waistbands.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="prod rv" data-cat="cords" href="https://www.popbros.com/roundelastic.php"><div class="prod-img"><img src="assets/products/round-elastic.jpeg" alt="Round elastic" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Round Elastic</h3><p>Round elastic cords in multiple diameters and colours for apparel, tags, packaging and crafts.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="prod rv" data-cat="furnish" href="https://www.popbros.com/shoelaces.php"><div class="prod-img"><img src="assets/products/show-lace.jpeg" alt="Shoe laces" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Shoe Laces</h3><p>Flat and round laces for footwear manufacturers, available in custom lengths and colours.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="prod rv" data-cat="medical" href="https://www.popbros.com/maskelastics.php"><div class="prod-img"><img src="assets/products/mask_elastic.png" alt="Mask elastics" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Mask Elastics</h3><p>Soft, skin-friendly ear loop elastics in flat and round profiles for medical and everyday masks.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="prod rv" data-cat="cords" href="https://www.popbros.com/ribbons.php"><div class="prod-img"><img src="assets/products/satinribbon.jpg" alt="Ribbons" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Ribbons</h3><p>Satin and decorative ribbons for garments, gifting and premium packaging.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+      <a class="prod rv" data-cat="furnish" href="https://www.popbros.com/sofaelastics.php"><div class="prod-img"><img src="assets/products/sofa_elastic.jpg" alt="Sofa elastics" loading="lazy"/><span class="prod-cta">View product <svg><use href="#i-arrow"/></svg></span></div><div class="prod-body"><h3>Sofa Elastics</h3><p>High-tension elastic webbing that provides firm, lasting support in upholstery and seating.</p><span class="link">View details <svg><use href="#i-arrow"/></svg></span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section soft" id="about" data-knot>
+  <div class="container about-grid">
+    <div class="about-media rv">
+      <div class="main"><img id="aboutImg" src="assets/why-us.jpg" alt="Popbros jacquard elastic production" loading="lazy" /></div>
+      <div class="since"><small>Established</small><b>1963</b></div>
+    </div>
+    <div>
+      <span class="kicker rv">About Popbros Industries</span>
+      <h2 class="h2 rv">Six decades of quality, built on constant innovation</h2>
+      <p class="rv">We manufacture premium quality braided, woven and knitted elastic and rigid tapes, cords and trims made from heat resistant rubber threads, and are pioneers in manufacturing latex-free braided elastics.</p>
+      <p class="rv" style="margin-top:14px">Our aim is the ultimate in customer satisfaction. We combine the latest machinery available in India with equipment imported from Europe, and keep upgrading our technology so customers receive the highest quality at a fair price.</p>
+      <ul class="checks rv">
+        <li><svg><use href="#i-check"/></svg>Latex-free braided elastics</li>
+        <li><svg><use href="#i-check"/></svg>Heat resistant rubber threads</li>
+        <li><svg><use href="#i-check"/></svg>European &amp; Indian machinery</li>
+        <li><svg><use href="#i-check"/></svg>Cost-competitive production</li>
+      </ul>
+      <a href="https://www.popbros.com/about.php" class="btn btn-primary rv">More About Us <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="stats" data-knot>
+  <div class="stats-bg" id="statsBg"></div>
+  <div class="container">
+    <div class="stat rv"><div class="n"><span class="count" data-to="60">0</span><span>+</span></div><i class="u"></i><p>Years of industry experience</p></div>
+    <div class="stat rv"><div class="n"><span class="count" data-to="200">0</span><span>+</span></div><i class="u"></i><p>Satisfied customers</p></div>
+    <div class="stat rv"><div class="n"><span class="count" data-to="300">0</span><span>+</span></div><i class="u"></i><p>Products in our range</p></div>
+    <div class="stat rv"><div class="n"><span class="count" data-to="40">0</span><span>+</span></div><i class="u"></i><p>Strong workforce</p></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section" id="quality" data-knot>
+  <div class="container">
+    <div class="sec-head center">
+      <span class="kicker rv">Why Popbros Industries</span>
+      <h2 class="h2 rv">Why manufacturers choose us</h2>
+      <p class="lead rv">Our dedicated approach and concern for quality make us one of the most preferred elastics suppliers across India.</p>
+    </div>
+    <div class="why-grid">
+      <div class="feat rv"><div class="ic"><svg><use href="#i-award"/></svg></div><h3>ISO 9001:2015 Certified</h3><p>Documented quality management processes applied across every stage of production.</p></div>
+      <div class="feat rv"><div class="ic"><svg><use href="#i-leaf"/></svg></div><h3>OEKO-TEX® Standard 100</h3><p>Products tested and certified for safety, suitable for garments worn close to the skin.</p></div>
+      <div class="feat rv"><div class="ic"><svg><use href="#i-clock"/></svg></div><h3>60+ Years of Experience</h3><p>Deep manufacturing know-how built over six decades serving the textile industry.</p></div>
+      <div class="feat rv"><div class="ic"><svg><use href="#i-factory"/></svg></div><h3>State-of-the-Art Facilities</h3><p>Modern machinery from India and Europe, continuously upgraded as technology evolves.</p></div>
+      <div class="feat rv"><div class="ic"><svg><use href="#i-tag"/></svg></div><h3>Premium Quality, Fair Prices</h3><p>Cost-competitive production that delivers the highest quality at an affordable price.</p></div>
+      <div class="feat rv"><div class="ic"><svg><use href="#i-layers"/></svg></div><h3>Range for Every Industry</h3><p>Products developed for varied industry verticals, from apparel to furnishings.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="section soft" style="padding-top:88px;padding-bottom:88px" data-knot>
+  <div class="container">
+    <div class="sec-head center" style="margin-bottom:44px">
+      <span class="kicker rv">Industries We Serve</span>
+      <h2 class="h2 rv">Trusted across sectors</h2>
+    </div>
+    <div class="ind-grid">
+      <div class="ind rv"><svg><use href="#i-shirt"/></svg><b>Apparel &amp; Garments</b></div>
+      <div class="ind rv"><svg><use href="#i-heart"/></svg><b>Innerwear &amp; Lingerie</b></div>
+      <div class="ind rv"><svg><use href="#i-shield"/></svg><b>Medical &amp; Masks</b></div>
+      <div class="ind rv"><svg><use href="#i-shoe"/></svg><b>Footwear</b></div>
+      <div class="ind rv"><svg><use href="#i-sofa"/></svg><b>Furniture &amp; Upholstery</b></div>
+      <div class="ind rv"><svg><use href="#i-gift"/></svg><b>Packaging &amp; Gifting</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-bottom:0">
+  <div class="container">
+    <div class="cta rv" id="cta">
+      <div class="cta-bg" id="ctaBg"></div>
+      <div>
+        <h2>Looking for a reliable elastics supplier?</h2>
+        <p>Share your requirements for width, colour, stretch and quantity, and our team will get back to you with samples and a quotation.</p>
+      </div>
+      <div class="btns">
+        <a href="#contact" class="btn btn-white">Get a Quote <svg><use href="#i-arrow"/></svg></a>
+        <a href="tel:+919426601176" class="btn btn-ghost">Call Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact" data-knot>
+  <div class="container">
+    <div class="sec-head center">
+      <span class="kicker rv">Get in Touch</span>
+      <h2 class="h2 rv">Let's discuss your requirements</h2>
+      <p class="lead rv">Fill in the form and our team will respond shortly.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="info-card rv">
+        <h3>Contact Information</h3>
+        <div class="info-row"><span class="ic"><svg><use href="#i-phone"/></svg></span><div><small>Call us</small><a href="tel:+919426601176">+91 94266 01176</a></div></div>
+        <div class="info-row"><span class="ic"><svg><use href="#i-mail"/></svg></span><div><small>Email us</small><a href="mailto:contact@popbros.com">contact@popbros.com</a></div></div>
+        <div class="info-row"><span class="ic"><svg><use href="#i-pin"/></svg></span><div><small>Visit us</small><span>Sagrampura, next to Anandnagar Society, Bhagwati Prints Compound, behind Kadiwala School, Surat 395002, Gujarat, India</span></div></div>
+        <div class="map" id="map">
+          <iframe title="Popbros Industries location" loading="lazy" src="https://maps.google.com/maps?q=21.1826487,72.8229988&z=16&output=embed"></iframe>
+          <span class="pin-ring"></span>
+          <span class="pin"><svg viewBox="0 0 34 44"><path d="M17 0C7.6 0 0 7.4 0 16.6 0 29 17 44 17 44s17-15 17-27.4C34 7.4 26.4 0 17 0z" fill="#1c8392"/><circle cx="17" cy="16.5" r="6.5" fill="#fff"/></svg></span>
+        </div>
+      </div>
+      <form class="rv" id="enquiry" novalidate>
+        <h3>Send an Enquiry</h3>
+        <p>We usually reply within one business day.</p>
+        <div class="row">
+          <div class="field"><input id="f-name" required placeholder=" " autocomplete="name" /><label for="f-name">Full name</label></div>
+          <div class="field"><input id="f-company" placeholder=" " autocomplete="organization" /><label for="f-company">Company</label></div>
+        </div>
+        <div class="row">
+          <div class="field"><input id="f-email" type="email" required placeholder=" " autocomplete="email" /><label for="f-email">Email</label></div>
+          <div class="field"><input id="f-phone" type="tel" placeholder=" " autocomplete="tel" /><label for="f-phone">Phone</label></div>
+        </div>
+        <div class="field">
+          <select id="f-prod"><option>Braided Elastic</option><option>Knitted Elastic</option><option>Woven / Garment Elastics</option><option>Jacquard Name Tape Elastics</option><option>Round Elastic</option><option>Shoe Laces</option><option>Mask Elastics</option><option>Ribbons</option><option>Sofa Elastics</option><option>Other</option></select>
+          <label for="f-prod">Product of interest</label>
+        </div>
+        <div class="field"><textarea id="f-msg" placeholder=" "></textarea><label for="f-msg">Requirements: width, colour, quantity, application</label></div>
+        <button class="btn btn-primary" type="submit">Submit Enquiry <svg><use href="#i-arrow"/></svg></button>
+        <p class="form-note">This demo form doesn't send anything yet.</p>
+        <div class="form-done" id="formDone" aria-live="polite">
+          <svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="38"/><path d="M27 43l10 10 20-22"/></svg>
+          <h3>Thank you!</h3>
+          <p>Your enquiry is ready. In this demo nothing was sent, but on the live site our team would reply within one business day.</p>
+          <button type="button" class="btn btn-outline" id="formReset">Send another enquiry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot">
+      <div>
+        <span class="flogo"><img src="assets/logo-transparent.png" alt="Popbros Industries" /></span>
+        <p>Manufacturers of premium braided, woven and knitted elastic and rigid tapes, cords and trims since 1963.</p>
+      </div>
+      <div><h4>Products</h4><ul><li><a href="#products">Braided Elastic</a></li><li><a href="#products">Knitted Elastic</a></li><li><a href="#products">Woven Elastics</a></li><li><a href="#products">Jacquard Elastics</a></li><li><a href="#products">Mask Elastics</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#about">About Us</a></li><li><a href="#quality">Quality</a></li><li><a href="#products">Products</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Contact</h4><address>Sagrampura, Bhagwati Prints Compound,<br/>Surat 395002, Gujarat, India<br/><a href="tel:+919426601176">+91 94266 01176</a><br/><a href="mailto:contact@popbros.com">contact@popbros.com</a></address></div>
+    </div>
+  </div>
+  <div class="foot-bottom container"><span>© 2026 Popbros Industries. All rights reserved.</span><span>Homepage redesign concept</span></div>
+</footer>
+
+<a href="#home" class="totop" id="totop" aria-label="Back to top"><svg><use href="#i-up"/></svg></a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const root = document.documentElement;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // If the animation library failed to load, show everything statically.
+  if (!window.gsap || !window.ScrollTrigger) { root.classList.remove('js'); basics(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.Flip) gsap.registerPlugin(Flip);
+
+  /* ---------------- smooth scrolling ---------------- */
+  let lenis = null;
+  if (!reduce && window.Lenis) {
+    root.style.scrollBehavior = 'auto';
+    lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const id = a.getAttribute('href'); const t = id === '#home' ? 0 : $(id);
+    if (t === null) return;
+    e.preventDefault(); $('#menu').classList.remove('open');
+    if (lenis) lenis.scrollTo(t, { offset: -70, duration: 1.3 });
+    else window.scrollTo({ top: t === 0 ? 0 : t.getBoundingClientRect().top + scrollY - 70, behavior: reduce ? 'auto' : 'smooth' });
+  }));
+
+  basics();
+
+  /* ---------------- 1. hero ---------------- */
+  // masked word-by-word headline
+  const title = $('#heroTitle');
+  (function split(node) {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const f = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(p => {
+          if (!p) return;
+          if (/^\s+$/.test(p)) { f.appendChild(document.createTextNode(' ')); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const i = document.createElement('span'); i.textContent = p; w.appendChild(i); f.appendChild(w);
+        });
+        n.replaceWith(f);
+      } else if (n.nodeType === 1) split(n);
+    });
+  })(title);
+  const words = title.querySelectorAll('.w > span');
+  if (reduce) { gsap.set(title, { visibility: 'visible' }); }
+  else {
+    gsap.set(words, { yPercent: 115 });
+    gsap.set(title, { visibility: 'visible' });
+    gsap.to(words, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.045, delay: 0.15 });
+  }
+
+  // wipe slideshow with slow zoom
+  const imgs = $$('#heroFrame img'), dots = $$('#heroDots button'), cap = $('#heroCap');
+  let cur = 0, busy = false, timer, kb;
+  gsap.set(imgs, { opacity: 0, zIndex: 0, clipPath: 'inset(0% 0% 0% 0%)' });
+  gsap.set(imgs[0], { opacity: 1, zIndex: 1 });
+  if (!reduce) kb = gsap.fromTo(imgs[0], { scale: 1.1 }, { scale: 1, duration: 7, ease: 'none' });
+  function show(n) {
+    if (busy || n === cur) return; busy = true;
+    const prev = imgs[cur], next = imgs[n];
+    dots[cur].classList.remove('on'); dots[n].classList.add('on');
+    gsap.to(cap, { opacity: 0, y: -6, duration: .25, onComplete: () => { cap.textContent = next.dataset.cap; gsap.fromTo(cap, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .35 }); } });
+    kb && kb.kill();
+    gsap.set(prev, { zIndex: 1 });
+    gsap.set(next, { zIndex: 2, opacity: 1, clipPath: 'inset(0% 0% 0% 100%)', scale: 1.18, xPercent: 0 });
+    const tl = gsap.timeline({ onComplete: () => { gsap.set(prev, { opacity: 0, zIndex: 0, xPercent: 0, scale: 1 }); busy = false; } });
+    tl.to(next, { clipPath: 'inset(0% 0% 0% 0%)', duration: reduce ? 0 : 1.25, ease: 'expo.inOut' }, 0)
+      .to(next, { scale: 1.08, duration: reduce ? 0 : 1.25, ease: 'expo.inOut' }, 0)
+      .to(prev, { xPercent: -10, duration: reduce ? 0 : 1.25, ease: 'expo.inOut' }, 0);
+    if (!reduce) kb = gsap.to(next, { scale: 1, duration: 6, ease: 'none', delay: 1.25 });
+    cur = n; restart();
+  }
+  function restart() { clearInterval(timer); timer = setInterval(() => show((cur + 1) % imgs.length), 5500); }
+  dots.forEach((d, i) => d.addEventListener('click', () => show(i)));
+  restart();
+
+  // mouse parallax on hero visual (uses CSS `translate` so it layers on top of the float animation)
+  if (finePointer && !reduce) {
+    const hero = $('.hero'), layers = [...$$('.float-card'), $('#heroFrame')];
+    const depth = el => +(el.dataset.depth || -5);
+    let tx = 0, ty = 0, cx = 0, cy = 0;
+    hero.addEventListener('mousemove', e => { const r = hero.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - .5; ty = (e.clientY - r.top) / r.height - .5; });
+    hero.addEventListener('mouseleave', () => { tx = 0; ty = 0; });
+    gsap.ticker.add(() => {
+      cx += (tx - cx) * .07; cy += (ty - cy) * .07;
+      layers.forEach(el => { const d = depth(el); el.style.translate = `${(cx * d).toFixed(2)}px ${(cy * d).toFixed(2)}px`; });
+    });
+  }
+
+  /* ---------------- 3. scroll effects ---------------- */
+  gsap.to('#progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+
+  // staggered reveals (hero handled by CSS)
+  const revealables = $$('.rv').filter(el => !el.closest('.hero') && !el.classList.contains('prod'));
+  if (reduce) revealables.forEach(el => el.classList.add('in'));
+  else ScrollTrigger.batch(revealables, {
+    start: 'top 88%', once: true,
+    onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: .9, ease: 'power3.out', stagger: .09, overwrite: true,
+      onComplete: () => batch.forEach(el => { el.classList.add('in'); gsap.set(el, { clearProps: 'opacity,transform' }); }) })
+  });
+
+  // gentle parallax
+  if (!reduce) {
+    gsap.fromTo('#aboutImg', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.fromTo('#statsBg', { yPercent: -12 }, { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '#stats', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.fromTo('#ctaBg', { yPercent: -10 }, { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '#cta', start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
+
+  /* ---------------- 2. elastic thread ---------------- */
+  const svgNS = 'http://www.w3.org/2000/svg', thread = $('#thread');
+  let tPath, tTrack, tTip, tGlow, knots = [], tLen = 0, tStart = 0, tEnd = 0, knotYs = [];
+  function buildThread() {
+    const gutter = (innerWidth - Math.min(1200, innerWidth - 48)) / 2;
+    if (gutter < 64 || reduce) { thread.style.display = 'none'; return; }
+    thread.style.display = 'block';
+    const first = $('.certstrip'), last = $('#contact');
+    tStart = first.getBoundingClientRect().top + scrollY + 40;
+    tEnd = last.getBoundingClientRect().bottom + scrollY - 120;
+    const cx = gutter / 2, amp = Math.min(gutter * .22, 22), h = tEnd - tStart;
+    thread.setAttribute('width', gutter); thread.setAttribute('height', tEnd + 20);
+    thread.style.width = gutter + 'px'; thread.style.height = (tEnd + 20) + 'px';
+    let d = `M${cx} ${tStart}`;
+    for (let y = 0; y <= h; y += 10) d += ` L${(cx + Math.sin(y / 170) * amp + Math.sin(y / 53) * amp * .15).toFixed(1)} ${(tStart + y).toFixed(1)}`;
+    thread.innerHTML = '';
+    tTrack = document.createElementNS(svgNS, 'path'); tTrack.setAttribute('class', 'track'); tTrack.setAttribute('d', d);
+    tPath = document.createElementNS(svgNS, 'path'); tPath.setAttribute('class', 'draw'); tPath.setAttribute('d', d);
+    thread.append(tTrack, tPath);
+    tLen = tPath.getTotalLength();
+    tPath.style.strokeDasharray = tLen; tPath.style.strokeDashoffset = tLen;
+    knots = []; knotYs = [];
+    $$('[data-knot]').forEach(sec => {
+      const y = sec.getBoundingClientRect().top + scrollY + 60; if (y < tStart || y > tEnd) return;
+      const x = cx + Math.sin((y - tStart) / 170) * amp + Math.sin((y - tStart) / 53) * amp * .15;
+      const k = document.createElementNS(svgNS, 'circle'); k.setAttribute('class', 'knot'); k.setAttribute('cx', x); k.setAttribute('cy', y); k.setAttribute('r', 5);
+      thread.appendChild(k); knots.push(k); knotYs.push(y);
+    });
+    tGlow = document.createElementNS(svgNS, 'circle'); tGlow.setAttribute('class', 'tip-glow'); tGlow.setAttribute('r', 11);
+    tTip = document.createElementNS(svgNS, 'circle'); tTip.setAttribute('class', 'tip'); tTip.setAttribute('r', 4.5);
+    thread.append(tGlow, tTip);
+    drawThread();
+  }
+  function drawThread() {
+    if (!tPath || thread.style.display === 'none') return;
+    const y = scrollY + innerHeight * .55;
+    const p = gsap.utils.clamp(0, 1, (y - tStart) / (tEnd - tStart));
+    const L = tLen * p;
+    tPath.style.strokeDashoffset = tLen - L;
+    const pt = tPath.getPointAtLength(Math.max(L, .1));
+    tTip.setAttribute('cx', pt.x); tTip.setAttribute('cy', pt.y);
+    tGlow.setAttribute('cx', pt.x); tGlow.setAttribute('cy', pt.y);
+    const vis = p > 0 && p < 1 ? 1 : 0; tTip.style.opacity = vis; tGlow.style.opacity = vis * .18;
+    knots.forEach((k, i) => k.classList.toggle('on', pt.y >= knotYs[i] - 2));
+  }
+  ScrollTrigger.addEventListener('refresh', buildThread);
+  addEventListener('scroll', drawThread, { passive: true });
+
+  /* ---------------- 4. product showcase ---------------- */
+  const grid = $('#prodGrid'), cards = $$('#prodGrid .prod'), fBtns = $$('#filters button'), pill = $('#filterPill');
+  cards.forEach(card => {
+    card.querySelector('.prod-img').insertAdjacentHTML('beforeend', '<span class="prod-sheen" aria-hidden="true"></span>');
+    card.insertAdjacentHTML('beforeend', '<span class="prod-glow" aria-hidden="true"></span>');
+    card.classList.add('in');
+  });
+
+  // cinematic reveal: card rises with a slight 3D tip, photo unmasks bottom-to-top and settles from a zoom,
+  // text follows. Cards play in diagonal order (top-left first).
+  function revealCards(list, baseDelay = 0) {
+    const tops = [...new Set(list.map(c => c.offsetTop))].sort((a, b) => a - b);
+    const lefts = [...new Set(list.map(c => c.offsetLeft))].sort((a, b) => a - b);
+    list.forEach(card => {
+      card.dataset.shown = '1';
+      const media = card.querySelector('.prod-img'), img = media.querySelector('img'), body = card.querySelectorAll('.prod-body > *');
+      const d = baseDelay + (tops.indexOf(card.offsetTop) + lefts.indexOf(card.offsetLeft)) * .12;
+      gsap.timeline({ delay: d, onComplete: () => gsap.set(card, { clearProps: 'transform,transformPerspective,transformOrigin' }) })
+        .fromTo(card, { opacity: 0, y: 70, rotateX: 9, transformPerspective: 1000, transformOrigin: '50% 100%' }, { opacity: 1, y: 0, rotateX: 0, duration: 1.15, ease: 'expo.out' }, 0)
+        .fromTo(media, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'expo.inOut' }, .05)
+        .fromTo(img, { scale: 1.28 }, { scale: 1, duration: 1.7, ease: 'expo.out' }, .15)
+        .fromTo(body, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .8, ease: 'power3.out', stagger: .07 }, .5);
+    });
+  }
+  if (!reduce) {
+    gsap.set(cards, { opacity: 0 });
+    ScrollTrigger.batch(cards, { start: 'top 88%', once: true, onEnter: batch => {
+      const todo = batch.filter(c => !c.dataset.shown && !c.classList.contains('is-hidden'));
+      todo.length && revealCards(todo);
+    } });
+  }
+
+  // hover physics (mouse/trackpad only)
+  if (finePointer && !reduce) {
+    cards.forEach(card => {
+      const media = card.querySelector('.prod-img'), img = media.querySelector('img'), cta = card.querySelector('.prod-cta');
+      card.addEventListener('mouseenter', () => {
+        if (grid.classList.contains('flipping')) return;
+        // elastic stretch: pull sideways, then spring back like a released band
+        gsap.timeline()
+          .to(img, { scaleX: 1.1, scaleY: 1.015, duration: .2, ease: 'power2.out', overwrite: 'auto' })
+          .to(img, { scaleX: 1.05, scaleY: 1.05, duration: 1.3, ease: 'elastic.out(1.1,0.28)' });
+      });
+      card.addEventListener('mousemove', e => {
+        if (grid.classList.contains('flipping')) return;
+        const r = card.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        gsap.to(card, { rotateX: (.5 - py) * 7, rotateY: (px - .5) * 7, y: -8, transformPerspective: 900, duration: .6, ease: 'power3.out', overwrite: 'auto' });
+        gsap.to(img, { x: (px - .5) * -16, y: (py - .5) * -12, duration: .9, ease: 'power3.out', overwrite: 'auto' });
+        card.style.setProperty('--sx', (px * 100).toFixed(1) + '%');
+        card.style.setProperty('--sy', (py * 100).toFixed(1) + '%');
+        const m = media.getBoundingClientRect();
+        if (e.clientY <= m.bottom) {
+          const cx = m.left + m.width / 2, cy = m.bottom - 18 - cta.offsetHeight / 2;
+          gsap.to(cta, { '--tx': gsap.utils.clamp(-60, 60, (e.clientX - cx) * .22) + 'px', '--ty': gsap.utils.clamp(-30, 8, (e.clientY - cy) * .22) + 'px', duration: .5, ease: 'power3.out', overwrite: 'auto' });
+        } else gsap.to(cta, { '--tx': '0px', '--ty': '0px', duration: .6, ease: 'power3.out', overwrite: 'auto' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { rotateX: 0, rotateY: 0, y: 0, duration: 1, ease: 'elastic.out(1,0.5)', overwrite: 'auto' });
+        gsap.to(img, { scaleX: 1, scaleY: 1, x: 0, y: 0, duration: .8, ease: 'power3.out', overwrite: 'auto' });
+        gsap.to(cta, { '--tx': '0px', '--ty': '0px', duration: .9, ease: 'elastic.out(1,0.4)', overwrite: 'auto' });
+      });
+    });
+    // one glow light shared by the whole grid
+    grid.addEventListener('mousemove', e => cards.forEach(c => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left).toFixed(0) + 'px');
+      c.style.setProperty('--my', (e.clientY - r.top).toFixed(0) + 'px');
+    }));
+    grid.addEventListener('mouseenter', () => grid.classList.add('glow'));
+    grid.addEventListener('mouseleave', () => grid.classList.remove('glow'));
+  } else if (!reduce) {
+    // touch: a quick elastic snap on tap
+    cards.forEach(card => card.addEventListener('pointerdown', () => {
+      const img = card.querySelector('.prod-img img');
+      gsap.timeline().to(img, { scaleX: 1.08, scaleY: 1.01, duration: .15, ease: 'power2.out', overwrite: 'auto' })
+        .to(img, { scaleX: 1, scaleY: 1, duration: 1.1, ease: 'elastic.out(1.1,0.3)' });
+    }));
+  }
+
+  /* ---------------- product filters (FLIP) ---------------- */
+  fBtns.forEach(b => { const s = b.querySelector('sup'); s.dataset.n = s.textContent; });
+  function movePill(btn) { pill.style.left = btn.offsetLeft + 'px'; pill.style.top = btn.offsetTop + 'px'; pill.style.width = btn.offsetWidth + 'px'; pill.style.height = btn.offsetHeight + 'px'; }
+  fBtns.forEach(b => b.addEventListener('click', () => {
+    if (b.classList.contains('on')) return;
+    fBtns.forEach(x => x.classList.toggle('on', x === b)); movePill(b);
+    const bar = $('#filters');
+    if (bar.scrollWidth > bar.clientWidth) gsap.to(bar, { scrollLeft: Math.max(0, b.offsetLeft - bar.clientWidth / 2 + b.offsetWidth / 2), duration: reduce ? 0 : .5, ease: 'power2.out' });
+    const f = b.dataset.f;
+    // count the tab's number up
+    const sup = b.querySelector('sup'), o = { v: 0 };
+    if (!reduce) gsap.to(o, { v: +sup.dataset.n, duration: .6, ease: 'power2.out', onUpdate: () => sup.textContent = Math.round(o.v) });
+    // reset any running card animation so FLIP measures clean positions
+    const parts = cards.flatMap(c => [c, c.querySelector('.prod-img'), c.querySelector('.prod-img img'), ...c.querySelectorAll('.prod-body > *')]);
+    gsap.killTweensOf(parts);
+    gsap.set(parts, { clearProps: 'opacity,transform,filter,clipPath' });
+    cards.forEach(c => { c.dataset.shown = '1'; });
+    const state = window.Flip ? Flip.getState(cards) : null;
+    cards.forEach(c => c.classList.toggle('is-hidden', f !== 'all' && c.dataset.cat !== f));
+    if (!state || reduce) { ScrollTrigger.refresh(); return; }
+    grid.classList.add('flipping'); grid.classList.remove('glow');
+    let entering = [];
+    Flip.from(state, {
+      duration: .8, ease: 'power3.inOut', absolute: true, nested: true,
+      onEnter: els => { entering = els; revealCards(els, .25); },
+      onLeave: els => gsap.to(els, { opacity: 0, scale: .86, filter: 'blur(8px)', duration: .45, ease: 'power2.in' }),
+      onComplete: () => {
+        grid.classList.remove('flipping');
+        gsap.set(cards.filter(c => !entering.includes(c)), { clearProps: 'opacity,transform,filter,scale' });
+        ScrollTrigger.refresh();
+      }
+    });
+  }));
+  addEventListener('resize', () => movePill($('#filters button.on')));
+  movePill(fBtns[0]);
+
+  /* ---------------- 6. trust + contact ---------------- */
+  $$('.count').forEach(el => {
+    const run = () => {
+      const stat = el.closest('.stat'); stat && stat.classList.add('counted');
+      if (reduce) { el.textContent = el.dataset.to; return; }
+      const o = { v: 0 }; gsap.to(o, { v: +el.dataset.to, duration: 1.8, ease: 'power3.out', onUpdate: () => el.textContent = Math.round(o.v) });
+    };
+    if (el.closest('.hero')) { el.textContent = '0'; gsap.delayedCall(.9, run); }
+    else ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: run });
+  });
+  ScrollTrigger.create({ trigger: '#map', start: 'top 85%', once: true, onEnter: () => $('#map').classList.add('drop') });
+
+  // form: success state with animated check
+  const form = $('#enquiry'), done = $('#formDone');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const bad = [...form.querySelectorAll('[required]')].find(i => !i.checkValidity());
+    if (bad) { bad.focus(); gsap.fromTo(bad, { x: -6 }, { x: 0, duration: .5, ease: 'elastic.out(1,.3)' }); return; }
+    done.classList.add('show');
+  });
+  $('#formReset').addEventListener('click', () => { form.reset(); done.classList.remove('show'); });
+
+  addEventListener('load', () => ScrollTrigger.refresh());
+  document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
+
+  /* ---------------- 5. header + shared basics ---------------- */
+  function basics() {
+    const header = $('#header'), totop = $('#totop'), menu = $('#menu'), ind = $('#navInd');
+    const links = $$('.menu a'), secs = links.map(a => $(a.getAttribute('href')));
+    let active = links[0];
+    const placeInd = a => { if (!a || !ind) return; ind.style.left = (a.offsetLeft + 16) + 'px'; ind.style.width = (a.offsetWidth - 32) + 'px'; };
+    links.forEach(a => {
+      a.addEventListener('mouseenter', () => placeInd(a));
+      a.addEventListener('click', () => menu.classList.remove('open'));
+    });
+    menu.addEventListener('mouseleave', () => placeInd(active));
+    const onScroll = () => {
+      const y = scrollY;
+      header.classList.toggle('scrolled', y > 40);
+      totop.classList.toggle('show', y > 700);
+      let i = 0; secs.forEach((s, k) => { if (s && s.getBoundingClientRect().top < 160) i = k; });
+      if (links[i] !== active) { active = links[i]; links.forEach(a => a.classList.toggle('active', a === active)); placeInd(active); }
+    };
+    addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    addEventListener('resize', () => placeInd(active));
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => placeInd(active));
+    placeInd(active);
+    $('#toggle').addEventListener('click', () => menu.classList.toggle('open'));
+    if (!window.gsap) {
+      $$('.rv').forEach(el => el.classList.add('in'));
+      $$('.stat').forEach(s => s.classList.add('counted'));
+      $$('.count').forEach(c => c.textContent = c.dataset.to);
+      $('#map').classList.add('drop');
+      $('#enquiry').addEventListener('submit', e => { e.preventDefault(); $('#formDone').classList.add('show'); });
+      $('#formReset').addEventListener('click', () => { $('#enquiry').reset(); $('#formDone').classList.remove('show'); });
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Popbros Industries — Elastics engineered since 1963</title>
+<meta name="description" content="Popbros Industries, Surat — manufacturers of braided, knitted, woven and jacquard elastics, cords and trims since 1963." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0a0c0f;
+    --ink-2:#12161b;
+    --ink-3:#1b2128;
+    --paper:#f3efe8;
+    --muted:#8a939c;
+    --line:rgba(255,255,255,.09);
+    --teal:#3bb3c3;
+    --teal-2:#7fe3ee;
+    --coral:#ff5d47;
+    --serif:"Instrument Serif", Georgia, serif;
+    --sans:"Manrope", system-ui, sans-serif;
+    --ease:cubic-bezier(.65,.05,0,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--ink);color:var(--paper);-webkit-font-smoothing:antialiased}
+  body{font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
+  body.loading{overflow:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--teal);color:var(--ink)}
+  @media (hover:none){body{cursor:auto}.cursor{display:none}}
+
+  /* ---------- grain ---------- */
+  .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.06;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain 1s steps(6) infinite}
+  @keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-2%)}80%{transform:translate(3%,4%)}}
+
+  /* ---------- cursor ---------- */
+  .cursor{position:fixed;top:0;left:0;z-index:100;pointer-events:none;mix-blend-mode:difference}
+  .cursor .dot{width:8px;height:8px;border-radius:50%;background:#fff;transform:translate(-50%,-50%)}
+  .cursor .ring{position:fixed;top:0;left:0;width:44px;height:44px;border:1px solid #fff;border-radius:50%;transform:translate(-50%,-50%);transition:width .4s var(--ease),height .4s var(--ease),background .3s}
+  .cursor.hover .ring{width:84px;height:84px;background:#fff}
+  .cursor .label{position:fixed;top:0;left:0;transform:translate(-50%,-50%);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#000;opacity:0;transition:opacity .2s}
+  .cursor.view .ring{width:110px;height:110px;background:#fff}
+  .cursor.view .label{opacity:1}
+
+  /* ---------- loader ---------- */
+  .loader{position:fixed;inset:0;z-index:200;background:var(--ink);display:grid;place-items:center}
+  .loader-inner{width:min(560px,80vw)}
+  .loader svg{width:100%;height:120px;overflow:visible}
+  .loader path{fill:none;stroke:var(--teal);stroke-width:3;stroke-linecap:round}
+  .loader-meta{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:18px}
+  .loader-year{font-family:var(--serif);font-size:clamp(64px,12vw,140px);line-height:1;color:var(--paper);text-align:center;letter-spacing:-.02em}
+  .loader-panel{position:fixed;left:0;width:100%;height:50.5%;background:var(--ink-2);z-index:199}
+  .loader-panel.top{top:0}.loader-panel.bot{bottom:0}
+
+  /* ---------- nav ---------- */
+  .nav{position:fixed;top:18px;left:0;right:0;margin:0 auto;z-index:80;width:min(1320px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 10px 10px 12px;border-radius:999px;background:rgba(14,17,21,.55);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid var(--line);transition:translate .6s var(--ease)}
+  .nav.hide{translate:0 -140%}
+  .brand{display:flex;align-items:center;background:#fff;border-radius:999px;padding:4px 16px;height:46px}
+  .brand img{height:36px;width:auto}
+  .nav ul{display:flex;gap:6px;list-style:none}
+  .nav ul a{display:block;padding:10px 16px;font-size:14px;font-weight:500;color:#c9d0d6;border-radius:999px;transition:background .3s,color .3s}
+  .nav ul a:hover{background:rgba(255,255,255,.07);color:#fff}
+  .btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:14px;overflow:hidden;isolation:isolate}
+  .btn-teal{background:var(--teal);color:var(--ink)}
+  .btn-teal::before{content:"";position:absolute;inset:0;background:var(--paper);transform:translateY(101%);border-radius:inherit;transition:transform .5s var(--ease);z-index:-1}
+  .btn-teal:hover::before{transform:translateY(0)}
+  .btn .arr{display:inline-block;transition:transform .4s var(--ease)}
+  .btn:hover .arr{transform:translateX(4px) rotate(-45deg)}
+  .btn-ghost{border:1px solid rgba(255,255,255,.25);color:#fff}
+  .btn-ghost:hover{border-color:#fff}
+  .burger{display:none;width:46px;height:46px;border-radius:50%;background:#fff;border:0;place-items:center}
+  .burger span{display:block;width:18px;height:2px;background:var(--ink);margin:3px auto}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;height:100svh;min-height:680px;overflow:hidden;display:flex;align-items:flex-end}
+  .hero-media{position:absolute;inset:0;overflow:hidden}
+  .hero-slide{position:absolute;inset:-8%;background-size:cover;background-position:center;opacity:0;transform:scale(1.15);will-change:transform,opacity}
+  .hero-slide.active{opacity:1}
+  .hero::after{content:"";position:absolute;inset:0;background:
+      radial-gradient(120% 80% at 70% 20%,transparent 0%,rgba(10,12,15,.55) 60%,rgba(10,12,15,.95) 100%),
+      linear-gradient(180deg,rgba(10,12,15,.55) 0%,transparent 30%,transparent 55%,var(--ink) 100%);z-index:1}
+  .hero-content{position:relative;z-index:2;width:min(1320px,calc(100% - 48px));margin:0 auto;padding-bottom:9vh}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-2);font-weight:600}
+  .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,10.5vw,184px);line-height:.88;letter-spacing:-.035em;margin:22px 0 28px}
+  .hero h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
+  .hero h1 .line > span{display:inline-block;will-change:transform}
+  .hero h1 em{font-style:italic;color:var(--teal)}
+  .stretch{display:inline-block;transform-origin:left center;transition:transform .9s cubic-bezier(.2,1.6,.4,1)}
+  .stretch:hover{transform:scaleX(1.22)}
+  .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+  .hero-bottom p{max-width:440px;color:#c2c9cf;font-size:17px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .slide-ctrl{position:absolute;z-index:3;right:max(24px,calc((100% - 1320px)/2));top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;align-items:flex-end}
+  .slide-ctrl button{background:none;border:0;color:#8a939c;font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:12px;cursor:none;transition:color .3s}
+  .slide-ctrl button i{display:block;width:24px;height:2px;background:rgba(255,255,255,.2);position:relative;overflow:hidden;transition:width .5s var(--ease)}
+  .slide-ctrl button i::after{content:"";position:absolute;inset:0;background:var(--teal);transform:scaleX(0);transform-origin:left}
+  .slide-ctrl button.on{color:#fff}
+  .slide-ctrl button.on i{width:64px}
+  .slide-ctrl button.on i::after{animation:fill 6s linear forwards}
+  @keyframes fill{to{transform:scaleX(1)}}
+  .scroll-hint{position:absolute;z-index:3;left:50%;bottom:22px;transform:translateX(-50%);width:1px;height:56px;background:rgba(255,255,255,.15);overflow:hidden}
+  .scroll-hint::after{content:"";position:absolute;left:0;top:-40%;width:100%;height:40%;background:var(--teal);animation:drip 1.8s var(--ease) infinite}
+  @keyframes drip{to{top:110%}}
+
+  /* ---------- elastic band (interactive svg) ---------- */
+  .band-wrap{position:relative;height:180px;margin-top:-90px;z-index:4;pointer-events:auto}
+  .band-wrap svg{width:100%;height:100%;overflow:visible}
+  .band-wrap path{fill:none;stroke-linecap:round}
+
+  /* ---------- marquee ---------- */
+  .marquee{border-block:1px solid var(--line);overflow:hidden;padding:26px 0;background:var(--ink)}
+  .marquee-track{display:flex;width:max-content;gap:56px;animation:marq 38s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  .marquee span{font-family:var(--serif);font-size:clamp(34px,4.6vw,68px);line-height:1;white-space:nowrap;display:flex;align-items:center;gap:56px;color:#d9dfe3}
+  .marquee span:nth-child(even){font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.4)}
+  .marquee span::after{content:"";width:14px;height:14px;border-radius:50%;background:var(--teal);flex:none}
+  @keyframes marq{to{transform:translateX(-50%)}}
+
+  /* ---------- generic sections ---------- */
+  section{position:relative}
+  .wrap{width:min(1320px,calc(100% - 48px));margin:0 auto}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:64px}
+  .sec-title{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.4vw,104px);line-height:.95;letter-spacing:-.03em}
+  .sec-title em{font-style:italic;color:var(--teal)}
+  .sec-sub{max-width:420px;color:#a8b1b9}
+  .reveal-up{opacity:0;transform:translateY(40px)}
+
+  /* ---------- intro / manifesto ---------- */
+  .intro{padding:180px 0 140px}
+  .intro-grid{display:grid;grid-template-columns:1fr 2.2fr;gap:60px}
+  .intro-label{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);position:sticky;top:120px;align-self:start}
+  .intro-label b{display:block;font-family:var(--serif);font-weight:400;font-size:96px;letter-spacing:-.03em;color:var(--paper);line-height:1;text-transform:none;margin-top:12px}
+  .manifesto{font-family:var(--serif);font-size:clamp(34px,4.3vw,66px);line-height:1.08;letter-spacing:-.02em}
+  .manifesto .w{opacity:.14;transition:opacity .2s}
+  .manifesto .w.hl{color:var(--teal)}
+
+  /* ---------- products horizontal ---------- */
+  .products{padding:40px 0 0;overflow:hidden}
+  .h-pin{height:100vh;display:flex;flex-direction:column;justify-content:center}
+  .h-track{display:flex;gap:28px;padding-left:max(24px,calc((100% - 1320px)/2));padding-right:10vw;will-change:transform}
+  .p-card{flex:none;width:clamp(300px,30vw,440px);position:relative}
+  .p-media{position:relative;aspect-ratio:4/5;border-radius:22px;overflow:hidden;background:var(--ink-3)}
+  .p-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.2s var(--ease),filter .8s}
+  .p-card:hover .p-media img{transform:scale(1.02)}
+  .p-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,12,15,.85))}
+  .p-num{position:absolute;top:18px;left:18px;z-index:2;font-size:12px;font-weight:700;letter-spacing:.14em;padding:7px 12px;border-radius:999px;background:rgba(10,12,15,.6);backdrop-filter:blur(8px);border:1px solid var(--line)}
+  .p-info{position:absolute;left:24px;right:24px;bottom:22px;z-index:2}
+  .p-info h3{font-family:var(--serif);font-weight:400;font-size:clamp(30px,2.6vw,40px);line-height:1;letter-spacing:-.02em;margin-bottom:10px}
+  .p-info p{font-size:14px;color:#c0c8ce;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s var(--ease),opacity .5s,margin .5s}
+  .p-card:hover .p-info p{max-height:90px;opacity:1;margin-bottom:12px}
+  .p-tag{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-2)}
+  .h-progress{width:min(1320px,calc(100% - 48px));margin:44px auto 0;height:2px;background:var(--line);position:relative}
+  .h-progress i{position:absolute;inset:0;background:var(--teal);transform-origin:left;transform:scaleX(0)}
+
+  /* ---------- stacked category cards ---------- */
+  .stack{padding:160px 0 60px}
+  .stack-card{position:sticky;top:90px;height:calc(100vh - 130px);min-height:520px;border-radius:28px;overflow:hidden;margin-bottom:40px;transform-origin:center top}
+  .stack-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .stack-card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,12,15,.85) 0%,rgba(10,12,15,.35) 55%,transparent 100%)}
+  .stack-body{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,4vw,60px)}
+  .stack-body .idx{font-size:13px;letter-spacing:.2em;font-weight:700;color:var(--teal-2)}
+  .stack-body h3{font-family:var(--serif);font-weight:400;font-size:clamp(52px,8vw,132px);line-height:.9;letter-spacing:-.035em;max-width:9ch}
+  .stack-body p{max-width:440px;color:#d1d7dc;margin:18px 0 26px}
+  .stack-meta{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{font-size:12px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);backdrop-filter:blur(6px)}
+
+  /* ---------- stats ---------- */
+  .stats{padding:140px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+  .stat{padding:44px 28px 10px 0;border-right:1px solid var(--line);position:relative}
+  .stat:last-child{border-right:0}
+  .stat:not(:first-child){padding-left:28px}
+  .stat .n{font-family:var(--serif);font-size:clamp(72px,9vw,150px);line-height:.9;letter-spacing:-.04em;display:flex;align-items:flex-start}
+  .stat .n sup{font-size:.4em;color:var(--teal);margin-left:4px;line-height:1.2}
+  .stat .l{color:var(--muted);font-size:15px;margin-top:14px;max-width:180px}
+
+  /* ---------- why ---------- */
+  .why{padding:60px 0 160px}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  .why-visual{position:sticky;top:110px;aspect-ratio:478/500;border-radius:28px;overflow:hidden}
+  .why-visual img{width:100%;height:100%;object-fit:cover;transform:scale(1.15)}
+  .why-badge{position:absolute;right:20px;bottom:20px;width:136px;height:136px;border-radius:50%;background:var(--teal);color:var(--ink);display:grid;place-items:center;z-index:2}
+  .why-badge svg{position:absolute;inset:0;animation:spin 18s linear infinite}
+  .why-badge b{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .why-list{list-style:none;border-top:1px solid var(--line)}
+  .why-list li{display:grid;grid-template-columns:70px 1fr 30px;align-items:center;gap:10px;padding:30px 0;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+  .why-list li::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(59,179,195,.14),transparent);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}
+  .why-list li:hover::before{transform:scaleX(1)}
+  .why-list .k{font-size:13px;font-weight:700;color:var(--teal);letter-spacing:.1em;position:relative}
+  .why-list h4{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,36px);line-height:1.1;letter-spacing:-.01em;position:relative;transition:transform .6s var(--ease)}
+  .why-list li:hover h4{transform:translateX(12px)}
+  .why-list .plus{position:relative;font-size:22px;color:var(--muted);transition:transform .5s var(--ease),color .3s}
+  .why-list li:hover .plus{transform:rotate(90deg);color:var(--teal)}
+
+  /* ---------- certificates ---------- */
+  .certs{padding:110px 0;background:var(--paper);color:var(--ink);border-radius:40px 40px 0 0}
+  .certs .sec-title em{color:#1b8a99}
+  .certs .sec-sub{color:#55606a}
+  .cert-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+  .cert{aspect-ratio:1;background:#fff;border-radius:22px;display:grid;place-items:center;padding:26px;border:1px solid rgba(0,0,0,.06);transition:transform .6s var(--ease),box-shadow .6s}
+  .cert:hover{transform:translateY(-8px) rotate(-1.5deg);box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+  .cert img{max-height:100%;object-fit:contain;mix-blend-mode:multiply}
+
+  /* ---------- CTA ---------- */
+  .cta{background:var(--paper);color:var(--ink);padding:40px 0 120px;overflow:hidden}
+  .cta-box{position:relative;border-radius:36px;background:var(--ink);color:var(--paper);padding:clamp(40px,7vw,110px);overflow:hidden}
+  .cta-box .bg{position:absolute;inset:0;background:url(assets/slider-2.jpg) center/cover;opacity:.32;filter:saturate(1.2)}
+  .cta-box::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 120% at 0% 100%,var(--ink) 25%,transparent 80%)}
+  .cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.4fr 1fr;gap:60px;align-items:end}
+  .cta h2{font-family:var(--serif);font-weight:400;font-size:clamp(52px,7.6vw,128px);line-height:.9;letter-spacing:-.035em}
+  .cta h2 em{color:var(--teal);font-style:italic}
+  .contact-list{display:grid;gap:4px}
+  .contact-list a,.contact-list div{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:15px}
+  .contact-list small{color:var(--muted);font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+  .contact-list a span{font-weight:600;transition:color .3s}
+  .contact-list a:hover span{color:var(--teal)}
+  .magnet{display:inline-block}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--paper);color:var(--ink);padding:0 0 30px;overflow:hidden}
+  .foot-top{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:40px;padding:60px 0;border-top:1px solid rgba(0,0,0,.1)}
+  .foot-top h5{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#6b757e;margin-bottom:16px}
+  .foot-top ul{list-style:none;display:grid;gap:8px;font-size:15px}
+  .foot-top a:hover{color:#1b8a99}
+  .foot-top address{font-style:normal;font-size:15px;line-height:1.7}
+  .foot-logo{height:52px;width:auto;margin-bottom:18px}
+  .giant{font-family:var(--serif);font-size:clamp(90px,23vw,380px);line-height:.78;letter-spacing:-.05em;text-align:center;white-space:nowrap;color:var(--ink)}
+  .giant span{display:inline-block}
+  .foot-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:#6b757e;padding-top:26px;border-top:1px solid rgba(0,0,0,.1)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .nav ul,.nav .btn{display:none}
+    .burger{display:grid}
+    .intro-grid,.why-grid,.cta-inner{grid-template-columns:1fr}
+    .intro-label{position:static}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .stat{border-bottom:1px solid var(--line)}
+    .stat:nth-child(2){border-right:0}
+    .stat:nth-child(3){padding-left:0}
+    .why-visual{position:relative;top:0;max-width:520px}
+    .cert-row{grid-template-columns:repeat(3,1fr)}
+    .foot-top{grid-template-columns:1fr 1fr}
+    .slide-ctrl{display:none}
+  }
+  @media (max-width:560px){
+    .cert-row{grid-template-columns:repeat(2,1fr)}
+    .foot-top{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr}
+    .stat,.stat:not(:first-child){padding-left:0;border-right:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+  .mobile-menu{position:fixed;inset:0;z-index:79;background:var(--ink-2);display:flex;flex-direction:column;justify-content:center;padding:40px;gap:10px;clip-path:circle(0% at calc(100% - 50px) 42px);transition:clip-path .8s var(--ease)}
+  .mobile-menu.open{clip-path:circle(150% at calc(100% - 50px) 42px)}
+  .mobile-menu a{font-family:var(--serif);font-size:56px;line-height:1.1}
+</style>
+</head>
+<body class="loading">
+
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><div class="ring"></div><div class="dot"></div><div class="label">View</div></div>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-year" id="loaderYear">1963</div>
+    <svg viewBox="0 0 560 120" preserveAspectRatio="none"><path id="loaderPath" d="M0 60 Q280 60 560 60" /></svg>
+    <div class="loader-meta"><span>Popbros Industries</span><span id="loaderPct">0%</span></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand" aria-label="Popbros Industries home"><img src="assets/logo.png" alt="Popbros Industries" /></a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#why">Why Popbros</a></li>
+    <li><a href="#quality">Certifications</a></li>
+  </ul>
+  <a href="#contact" class="btn btn-teal" data-cursor="hover">Request a quote <span class="arr">→</span></a>
+  <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span></button>
+</header>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#about">About</a><a href="#products">Products</a><a href="#why">Why Popbros</a><a href="#quality">Certifications</a><a href="#contact">Contact</a>
+</nav>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-media" id="heroMedia">
+    <div class="hero-slide active" style="background-image:url(assets/slider-2.jpg)"></div>
+    <div class="hero-slide" style="background-image:url(assets/slider-1.jpg)"></div>
+    <div class="hero-slide" style="background-image:url(assets/slider-3.jpg)"></div>
+    <div class="hero-slide" style="background-image:url(assets/slider-4.jpg)"></div>
+  </div>
+
+  <div class="slide-ctrl" id="slideCtrl">
+    <button class="on" data-i="0"><span>Braided</span><i></i></button>
+    <button data-i="1"><span>Knitted</span><i></i></button>
+    <button data-i="2"><span>Woven</span><i></i></button>
+    <button data-i="3"><span>Mask</span><i></i></button>
+  </div>
+
+  <div class="hero-content">
+    <span class="eyebrow hero-fade">Surat, India · Est. 1963</span>
+    <h1>
+      <span class="line"><span>Elastics that</span></span>
+      <span class="line"><span><em class="stretch">stretch</em> further,</span></span>
+      <span class="line"><span>hold longer.</span></span>
+    </h1>
+    <div class="hero-bottom hero-fade">
+      <p>Premium braided, knitted &amp; woven elastics, cords and trims, made from heat resistant rubber threads. Pioneers of latex-free braided elastic for six decades.</p>
+      <div class="hero-ctas">
+        <a href="#products" class="btn btn-teal" data-cursor="hover">Explore the range <span class="arr">→</span></a>
+        <a href="#contact" class="btn btn-ghost" data-cursor="hover">Talk to us</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"></div>
+</section>
+
+<!-- INTERACTIVE ELASTIC BAND -->
+<div class="band-wrap" id="band" aria-hidden="true">
+  <svg id="bandSvg" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="bandGrad" x1="0" x2="1">
+        <stop offset="0" stop-color="#3bb3c3" stop-opacity="0"/>
+        <stop offset=".2" stop-color="#3bb3c3"/>
+        <stop offset=".8" stop-color="#7fe3ee"/>
+        <stop offset="1" stop-color="#7fe3ee" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path id="bandA" stroke="url(#bandGrad)" stroke-width="2.5"/>
+    <path id="bandB" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+    <path id="bandC" stroke="rgba(255,93,71,.55)" stroke-width="1"/>
+  </svg>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Braided Elastic</span><span>Knitted Elastic</span><span>Woven Elastic</span><span>Jacquard Name Tape</span><span>Round Elastic</span><span>Shoe Laces</span><span>Mask Elastics</span><span>Ribbons</span><span>Sofa Elastics</span>
+    <span>Braided Elastic</span><span>Knitted Elastic</span><span>Woven Elastic</span><span>Jacquard Name Tape</span><span>Round Elastic</span><span>Shoe Laces</span><span>Mask Elastics</span><span>Ribbons</span><span>Sofa Elastics</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro" id="about">
+  <div class="wrap intro-grid">
+    <div class="intro-label">About Popbros<b>Since<br/>1963</b></div>
+    <div>
+      <p class="manifesto" id="manifesto">Our dedicated approach and special concern for quality makes us one of the most preferred elastics suppliers across India. We pair the latest Indian machinery with equipment imported from Europe, constantly upgrading technology so our customers get the highest quality at a fair price.</p>
+      <div style="margin-top:48px" class="reveal-up">
+        <a href="#why" class="btn btn-ghost" data-cursor="hover">Our story <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS: HORIZONTAL -->
+<section class="products" id="products">
+  <div class="wrap sec-head">
+    <h2 class="sec-title reveal-up">The <em>range.</em><br/>Nine families, 300+ products.</h2>
+    <p class="sec-sub reveal-up">From garment waistbands to medical masks and upholstery, every product is engineered for stretch, recovery and durability.</p>
+  </div>
+  <div class="h-pin" id="hPin">
+    <div class="h-track" id="hTrack">
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">01</span><img src="assets/products/insertion-tapes.jpg" alt="Braided elastic" loading="lazy"/></div>
+        <div class="p-info"><h3>Braided Elastic</h3><p>Multiple strands of rubber or latex braided together. Narrows when stretched, ideal for sleeves, necklines and lightweight garments.</p><span class="p-tag">Know more →</span></div></article>
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">02</span><img src="assets/products/knittedelastic.jpg" alt="Knitted elastic" loading="lazy"/></div>
+        <div class="p-info"><h3>Knitted Elastic</h3><p>A versatile, soft elastic that keeps its width when stretched, made for applications that need comfort against the skin.</p><span class="p-tag">Know more →</span></div></article>
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">03</span><img src="assets/products/wovenelastic.jpg" alt="Woven garment elastic" loading="lazy"/></div>
+        <div class="p-info"><h3>Woven / Garment</h3><p>Strong and durable even after repeated use. The workhorse for waistbands and heavy-duty garments.</p><span class="p-tag">Know more →</span></div></article>
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">04</span><img src="assets/products/jacaquardelastic.jpg" alt="Jacquard name tape elastic" loading="lazy"/></div>
+        <div class="p-info"><h3>Jacquard Name Tape</h3><p>A delicate, smooth and soft texture with a shiny, glossy finish, woven with your brand name or pattern.</p><span class="p-tag">Know more →</span></div></article>
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">05</span><img src="assets/products/round-elastic.jpeg" alt="Round elastic cord" loading="lazy"/></div>
+        <div class="p-info"><h3>Round Elastic</h3><p>Round cords in a range of diameters and colours for tags, packaging, crafts and apparel.</p><span class="p-tag">Know more →</span></div></article>
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">06</span><img src="assets/products/show-lace.jpeg" alt="Shoe laces" loading="lazy"/></div>
+        <div class="p-info"><h3>Shoe Laces</h3><p>Flat and round laces, including elastic no-tie options, for footwear manufacturers.</p><span class="p-tag">Know more →</span></div></article>
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">07</span><img src="assets/products/mask_elastic.png" alt="Mask elastics" loading="lazy"/></div>
+        <div class="p-info"><h3>Mask Elastics</h3><p>Soft, skin-friendly ear loops and latex-free options for medical and everyday masks.</p><span class="p-tag">Know more →</span></div></article>
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">08</span><img src="assets/products/satinribbon.jpg" alt="Satin ribbons" loading="lazy"/></div>
+        <div class="p-info"><h3>Ribbons</h3><p>Satin and decorative ribbons for garments, gifting and packaging.</p><span class="p-tag">Know more →</span></div></article>
+      <article class="p-card" data-cursor="view"><div class="p-media"><span class="p-num">09</span><img src="assets/products/sofa_elastic.jpg" alt="Sofa elastic webbing" loading="lazy"/></div>
+        <div class="p-info"><h3>Sofa Elastics</h3><p>High-tension elastic webbing for upholstery and furniture seating support.</p><span class="p-tag">Know more →</span></div></article>
+    </div>
+    <div class="h-progress"><i id="hBar"></i></div>
+  </div>
+</section>
+
+<!-- STACKED CATEGORIES -->
+<section class="stack wrap">
+  <div class="stack-card"><img src="assets/slider-2.jpg" alt="Braided elastic in many colours" />
+    <div class="stack-body"><span class="idx">01 / Signature</span><div><h3>Braided Elastic</h3><p>Pioneers in latex-free braided elastics. Dyed to any shade, engineered for consistent stretch and recovery.</p><div class="stack-meta"><span class="chip">Latex-free</span><span class="chip">Heat resistant</span><span class="chip">Custom colours</span></div></div></div></div>
+  <div class="stack-card"><img src="assets/slider-1.jpg" alt="Knitted elastic on black" />
+    <div class="stack-body"><span class="idx">02 / Comfort</span><div><h3>Knitted Elastic</h3><p>Soft hand-feel that keeps its width under tension, built for intimate wear, kidswear and everyday garments.</p><div class="stack-meta"><span class="chip">Soft touch</span><span class="chip">Non-curling</span><span class="chip">Multiple widths</span></div></div></div></div>
+  <div class="stack-card"><img src="assets/slider-3.jpg" alt="Woven garment elastic" />
+    <div class="stack-body"><span class="idx">03 / Strength</span><div><h3>Woven Elastic</h3><p>Firm, durable and dependable through repeated wash and wear. The backbone of waistbands everywhere.</p><div class="stack-meta"><span class="chip">High tension</span><span class="chip">Wash-durable</span><span class="chip">Rigid tapes</span></div></div></div></div>
+  <div class="stack-card"><img src="assets/slider-4.jpg" alt="Mask elastics" />
+    <div class="stack-body"><span class="idx">04 / Care</span><div><h3>Mask Elastics</h3><p>Gentle ear loops that stay comfortable over long hours, available in round and flat profiles.</p><div class="stack-meta"><span class="chip">Skin-friendly</span><span class="chip">OEKO-TEX</span><span class="chip">Bulk supply</span></div></div></div></div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat"><div class="n"><span class="count" data-to="60">0</span><sup>+</sup></div><div class="l">Years of industry experience</div></div>
+      <div class="stat"><div class="n"><span class="count" data-to="200">0</span><sup>+</sup></div><div class="l">Satisfied customers</div></div>
+      <div class="stat"><div class="n"><span class="count" data-to="300">0</span><sup>+</sup></div><div class="l">Products in the range</div></div>
+      <div class="stat"><div class="n"><span class="count" data-to="40">0</span><sup>+</sup></div><div class="l">Strong workforce</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="wrap why-grid">
+    <div class="why-visual" id="whyVisual">
+      <img src="assets/why-us.jpg" alt="Popbros manufacturing" />
+      <div class="why-badge">
+        <svg viewBox="0 0 136 136"><defs><path id="circ" d="M68,68 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs>
+          <text font-size="10.5" font-weight="700" letter-spacing="3.2" fill="#0a0c0f" font-family="Manrope"><textPath href="#circ">ISO 9001:2015 · OEKO-TEX 100 · </textPath></text></svg>
+        <b>60+</b>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow reveal-up">Why Popbros Industries</span>
+      <h2 class="sec-title reveal-up" style="margin:18px 0 48px">Why people <em>choose</em> us</h2>
+      <ul class="why-list">
+        <li class="reveal-up"><span class="k">01</span><h4>ISO 9001:2015 certified company</h4><span class="plus">+</span></li>
+        <li class="reveal-up"><span class="k">02</span><h4>OEKO-TEX Standard 100 certified products</h4><span class="plus">+</span></li>
+        <li class="reveal-up"><span class="k">03</span><h4>60+ years of industry experience</h4><span class="plus">+</span></li>
+        <li class="reveal-up"><span class="k">04</span><h4>State-of-the-art production facilities</h4><span class="plus">+</span></li>
+        <li class="reveal-up"><span class="k">05</span><h4>Premium range at affordable prices</h4><span class="plus">+</span></li>
+        <li class="reveal-up"><span class="k">06</span><h4>Products for varied industry verticals</h4><span class="plus">+</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section class="certs" id="quality">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-title reveal-up">Certified <em>quality,</em><br/>every metre.</h2>
+      <p class="sec-sub reveal-up">Independent certifications and trusted marketplace credentials back every roll that leaves our Surat facility.</p>
+    </div>
+    <div class="cert-row">
+      <div class="cert"><img src="assets/certs/certificate-1.png" alt="Certification" loading="lazy"/></div>
+      <div class="cert"><img src="assets/certs/certificate-2.png" alt="Certification" loading="lazy"/></div>
+      <div class="cert"><img src="assets/certs/certificate-5.png" alt="Certification" loading="lazy"/></div>
+      <div class="cert"><img src="assets/certs/certificate-8.jpg" alt="Certification" loading="lazy"/></div>
+      <div class="cert"><img src="assets/certs/certificate-6.jpg" alt="Certification" loading="lazy"/></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="cta-box">
+      <div class="bg"></div>
+      <div class="cta-inner">
+        <div>
+          <span class="eyebrow">Get in touch</span>
+          <h2 style="margin-top:20px">Let's make<br/>something that <em>holds.</em></h2>
+          <div style="margin-top:36px"><a href="mailto:contact@popbros.com" class="btn btn-teal magnet" data-cursor="hover">Start an enquiry <span class="arr">→</span></a></div>
+        </div>
+        <div class="contact-list">
+          <a href="tel:+919426601176" data-cursor="hover"><small>Call</small><span>+91 94266 01176</span></a>
+          <a href="mailto:contact@popbros.com" data-cursor="hover"><small>Email</small><span>contact@popbros.com</span></a>
+          <a href="https://maps.google.com/?cid=5123462886429480240" target="_blank" rel="noopener" data-cursor="hover"><small>Visit</small><span>Sagrampura, Surat 395002</span></a>
+          <div><small>Google rating</small><span>★ 5.0 · 14 reviews</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <img class="foot-logo" src="assets/logo.png" alt="Popbros Industries" />
+        <p style="max-width:300px;color:#55606a;font-size:15px">Premium braided, woven &amp; knitted elastic and rigid tapes, cords and trims since 1963.</p>
+      </div>
+      <div><h5>Products</h5><ul><li><a href="#products">Braided Elastic</a></li><li><a href="#products">Knitted Elastic</a></li><li><a href="#products">Woven Elastic</a></li><li><a href="#products">Jacquard Tapes</a></li><li><a href="#products">Mask Elastics</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="#about">About us</a></li><li><a href="#why">Why Popbros</a></li><li><a href="#quality">Certifications</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h5>Factory</h5><address>Popbros Industries<br/>Sagrampura, next to Anandnagar Society,<br/>Bhagwati Prints Compound,<br/>behind Kadiwala School,<br/>Surat 395002, Gujarat, India</address></div>
+    </div>
+    <div class="giant" id="giant"><span>P</span><span>o</span><span>p</span><span>b</span><span>r</span><span>o</span><span>s</span></div>
+    <div class="foot-bot"><span>© 2026 Popbros Industries. All rights reserved.</span><span>Homepage redesign concept, demo only</span></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  gsap.registerPlugin(ScrollTrigger);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- smooth scroll ---------- */
+  let lenis;
+  if (!reduce && window.Lenis) {
+    lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    lenis.stop();
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (!t) return; e.preventDefault();
+    document.getElementById('mobileMenu').classList.remove('open');
+    lenis ? lenis.scrollTo(t, { offset: -20, duration: 1.4 }) : t.scrollIntoView({ behavior: 'smooth' });
+  }));
+
+  /* ---------- cursor ---------- */
+  const cur = document.querySelector('.cursor'), ring = cur.querySelector('.ring'), dot = cur.querySelector('.dot'), lab = cur.querySelector('.label');
+  const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
+  const rx = gsap.quickTo(ring, 'x', { duration: .5, ease: 'power3' }), ry = gsap.quickTo(ring, 'y', { duration: .5, ease: 'power3' });
+  const lx = gsap.quickTo(lab, 'x', { duration: .5, ease: 'power3' }), ly = gsap.quickTo(lab, 'y', { duration: .5, ease: 'power3' });
+  addEventListener('mousemove', e => {
+    mouse.x = e.clientX; mouse.y = e.clientY;
+    gsap.set(dot, { x: e.clientX, y: e.clientY }); rx(e.clientX); ry(e.clientY); lx(e.clientX); ly(e.clientY);
+  });
+  document.querySelectorAll('a,button,[data-cursor="hover"]').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
+  });
+  document.querySelectorAll('[data-cursor="view"]').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('view'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('view'));
+  });
+
+  /* ---------- magnetic buttons ---------- */
+  document.querySelectorAll('.btn').forEach(b => {
+    b.addEventListener('mousemove', e => {
+      const r = b.getBoundingClientRect();
+      gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * .25, y: (e.clientY - r.top - r.height / 2) * .35, duration: .4, ease: 'power3' });
+    });
+    b.addEventListener('mouseleave', () => gsap.to(b, { x: 0, y: 0, duration: .8, ease: 'elastic.out(1,.35)' }));
+  });
+
+  /* ---------- nav hide on scroll ---------- */
+  const nav = document.getElementById('nav'); let lastY = 0;
+  addEventListener('scroll', () => {
+    const y = scrollY; nav.classList.toggle('hide', y > lastY && y > 300); lastY = y;
+  }, { passive: true });
+  document.getElementById('burger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+
+  /* ---------- loader ---------- */
+  const yearEl = document.getElementById('loaderYear'), pctEl = document.getElementById('loaderPct'), lp = document.getElementById('loaderPath');
+  const state = { y: 1963, p: 0, b: 0 };
+  const intro = gsap.timeline({ onComplete: () => { document.body.classList.remove('loading'); lenis && lenis.start(); } });
+  intro
+    .to(state, { y: 2026, p: 100, duration: reduce ? .1 : 2, ease: 'power2.inOut',
+      onUpdate: () => { yearEl.textContent = Math.round(state.y); pctEl.textContent = Math.round(state.p) + '%'; } }, 0)
+    .to(state, { b: 1, duration: 1, ease: 'power2.in', onUpdate: () => lp.setAttribute('d', `M0 60 Q280 ${60 + state.b * 90} 560 60`) }, 0.3)
+    .to(state, { b: -0.4, duration: 1, ease: 'elastic.out(1.2,.25)', onUpdate: () => lp.setAttribute('d', `M0 60 Q280 ${60 + state.b * 90} 560 60`) }, 1.3)
+    .to('.loader-inner', { opacity: 0, y: -30, duration: .5, ease: 'power2.in' }, 2.3)
+    .to('#loader', { clipPath: 'inset(0 0 100% 0)', duration: 1, ease: 'expo.inOut' }, 2.6)
+    .from('.hero-slide.active', { scale: 1.5, duration: 2.2, ease: 'expo.out' }, 2.7)
+    .from('.hero h1 .line > span', { yPercent: 115, rotate: 3, duration: 1.3, stagger: .1, ease: 'expo.out' }, 2.95)
+    .from('.hero-fade', { opacity: 0, y: 24, duration: 1, stagger: .12, ease: 'power3.out' }, 3.3)
+    .from('#nav', { y: -100, opacity: 0, duration: 1, ease: 'expo.out' }, 3.2)
+    .from('.slide-ctrl button', { x: 40, opacity: 0, stagger: .08, duration: .8, ease: 'power3.out' }, 3.4);
+
+  /* ---------- hero slider ---------- */
+  const slides = [...document.querySelectorAll('.hero-slide')], ctrls = [...document.querySelectorAll('.slide-ctrl button')];
+  let cur_i = 0, timer;
+  gsap.set(slides, { opacity: 0, scale: 1.15 }); gsap.set(slides[0], { opacity: 1, scale: 1.08 });
+  function go(n) {
+    if (n === cur_i) return;
+    const prev = slides[cur_i], next = slides[n];
+    gsap.set(next, { zIndex: 2, clipPath: 'inset(0 0 0 100%)', opacity: 1, scale: 1.25 });
+    gsap.set(prev, { zIndex: 1 });
+    gsap.to(next, { clipPath: 'inset(0 0 0 0%)', duration: 1.4, ease: 'expo.inOut' });
+    gsap.to(next, { scale: 1.08, duration: 2.2, ease: 'expo.out' });
+    gsap.to(prev, { scale: 1.0, xPercent: -6, duration: 1.4, ease: 'expo.inOut', onComplete: () => gsap.set(prev, { opacity: 0, xPercent: 0 }) });
+    ctrls.forEach((c, i) => { c.classList.remove('on'); void c.offsetWidth; c.classList.toggle('on', i === n); });
+    cur_i = n; restart();
+  }
+  function restart() { clearInterval(timer); timer = setInterval(() => go((cur_i + 1) % slides.length), 6000); }
+  ctrls.forEach(c => c.addEventListener('click', () => go(+c.dataset.i)));
+  setTimeout(restart, 3000);
+
+  // hero parallax by mouse + scroll
+  const hm = document.getElementById('heroMedia');
+  addEventListener('mousemove', e => {
+    gsap.to(hm, { x: (e.clientX / innerWidth - .5) * -30, y: (e.clientY / innerHeight - .5) * -20, duration: 1.2, ease: 'power3' });
+  });
+  gsap.to('.hero-content', { yPercent: -30, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  gsap.to('#heroMedia', { yPercent: 18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* ---------- interactive elastic band (spring physics) ---------- */
+  const band = document.getElementById('band'), svg = document.getElementById('bandSvg');
+  const pA = document.getElementById('bandA'), pB = document.getElementById('bandB'), pC = document.getElementById('bandC');
+  let W = 0, H = 180, pull = { x: 0, y: 0, vy: 0 }, target = 0, hovering = false;
+  function sizeBand() { W = band.clientWidth; svg.setAttribute('viewBox', `0 0 ${W} ${H}`); }
+  sizeBand(); addEventListener('resize', sizeBand);
+  band.addEventListener('mousemove', e => {
+    const r = band.getBoundingClientRect();
+    hovering = true; pull.x = e.clientX - r.left; target = (e.clientY - r.top) - H / 2;
+  });
+  band.addEventListener('mouseleave', () => { hovering = false; target = 0; });
+  (function loop() {
+    const k = hovering ? .18 : .06, damp = hovering ? .7 : .9;
+    pull.vy += (target - pull.y) * k; pull.vy *= damp; pull.y += pull.vy;
+    const mid = H / 2, x = pull.x || W / 2;
+    const t = performance.now() / 1000;
+    const idle = Math.sin(t * 1.4) * 6;
+    pA.setAttribute('d', `M0 ${mid} Q${x} ${mid + pull.y * 1.9 + idle} ${W} ${mid}`);
+    pB.setAttribute('d', `M0 ${mid - 14} Q${x} ${mid - 14 + pull.y * 1.4 - idle} ${W} ${mid - 14}`);
+    pC.setAttribute('d', `M0 ${mid + 14} Q${x} ${mid + 14 + pull.y * 1.2 + idle * .6} ${W} ${mid + 14}`);
+    requestAnimationFrame(loop);
+  })();
+
+  /* ---------- manifesto word reveal ---------- */
+  const man = document.getElementById('manifesto');
+  const hlWords = ['quality', 'preferred', 'Europe,', 'highest', 'fair'];
+  man.innerHTML = man.textContent.trim().split(/\s+/).map(w => `<span class="w${hlWords.includes(w) ? ' hl' : ''}">${w}</span>`).join(' ');
+  gsap.to('#manifesto .w', { opacity: 1, stagger: .05, ease: 'none',
+    scrollTrigger: { trigger: man, start: 'top 75%', end: 'bottom 45%', scrub: true } });
+
+  /* ---------- generic reveals ---------- */
+  gsap.utils.toArray('.reveal-up').forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'expo.out',
+    scrollTrigger: { trigger: el, start: 'top 90%' } }));
+
+  /* ---------- horizontal products ---------- */
+  const track = document.getElementById('hTrack');
+  const dist = () => track.scrollWidth - innerWidth;
+  const hTween = gsap.to(track, { x: () => -dist(), ease: 'none',
+    scrollTrigger: { trigger: '#hPin', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true,
+      onUpdate: s => gsap.set('#hBar', { scaleX: s.progress }) } });
+  gsap.utils.toArray('.p-card').forEach(card => {
+    gsap.fromTo(card.querySelector('img'), { xPercent: -8 }, { xPercent: 8, ease: 'none',
+      scrollTrigger: { trigger: card, containerAnimation: hTween, start: 'left right', end: 'right left', scrub: true } });
+    gsap.from(card, { y: 80, rotate: 4, opacity: 0, duration: 1, ease: 'expo.out',
+      scrollTrigger: { trigger: card, containerAnimation: hTween, start: 'left 95%' } });
+  });
+
+  /* ---------- stacked cards ---------- */
+  const cards = gsap.utils.toArray('.stack-card');
+  cards.forEach((c, i) => {
+    gsap.fromTo(c.querySelector('img'), { scale: 1.25 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: c, start: 'top bottom', end: 'top 90px', scrub: true } });
+    gsap.from(c.querySelectorAll('h3, p, .stack-meta'), { y: 50, opacity: 0, stagger: .1, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: c, start: 'top 60%' } });
+    if (i < cards.length - 1) {
+      gsap.to(c, { scale: .9, filter: 'brightness(.45)', ease: 'none',
+        scrollTrigger: { trigger: cards[i + 1], start: 'top bottom', end: 'top 90px', scrub: true } });
+    }
+  });
+
+  /* ---------- counters ---------- */
+  document.querySelectorAll('.count').forEach(el => {
+    const o = { v: 0 };
+    gsap.to(o, { v: +el.dataset.to, duration: 2.2, ease: 'power3.out', onUpdate: () => el.textContent = Math.round(o.v),
+      scrollTrigger: { trigger: el, start: 'top 85%' } });
+  });
+  gsap.from('.stat', { y: 60, opacity: 0, stagger: .12, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.stats-grid', start: 'top 85%' } });
+
+  /* ---------- why image parallax ---------- */
+  gsap.to('#whyVisual img', { scale: 1, yPercent: -6, ease: 'none', scrollTrigger: { trigger: '.why', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* ---------- certs + cta ---------- */
+  gsap.from('.cert', { y: 80, rotate: (i) => (i % 2 ? 4 : -4), opacity: 0, stagger: .08, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.cert-row', start: 'top 85%' } });
+  gsap.from('.cta-box', { scale: .92, borderRadius: 80, ease: 'none', scrollTrigger: { trigger: '.cta-box', start: 'top bottom', end: 'top 30%', scrub: true } });
+  gsap.from('.cta-box .bg', { scale: 1.3, ease: 'none', scrollTrigger: { trigger: '.cta-box', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* ---------- giant footer word: elastic letters ---------- */
+  gsap.from('#giant span', { yPercent: 100, scaleY: 1.8, transformOrigin: 'bottom', stagger: .05, duration: 1.4, ease: 'elastic.out(1,.4)',
+    scrollTrigger: { trigger: '#giant', start: 'top 95%' } });
+  document.querySelectorAll('#giant span').forEach(s => s.addEventListener('mouseenter', () => {
+    gsap.fromTo(s, { scaleY: 1.35, scaleX: .85 }, { scaleY: 1, scaleX: 1, duration: 1.2, ease: 'elastic.out(1.2,.25)', transformOrigin: 'bottom' });
+  }));
+
+  addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
